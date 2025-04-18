@@ -1,0 +1,4 @@
+<div *ngIf="loaderService.loading$ | async" class="loader-overlay">
+  <app-loader></app-loader>
+</div>
+<router-outlet></router-outlet>

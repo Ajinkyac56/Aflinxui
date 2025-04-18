@@ -1,0 +1,36 @@
+<div class="modal-dialog modal-dialog-centered w-100 h-100 m-0">
+  <div class="modal-content d-flex flex-column h-100 p-4">
+    <div class="modal-header border-bottom pb-4">
+      <h5 class="modal-title">{{ data?.id ? 'Edit Survey' : 'Add Survey' }}</h5>
+      <button type="button" class="btn-close" (click)="closeDialog()"></button>
+    </div>
+
+    <form [formGroup]="surveyForm" (ngSubmit)="onSave()" class="d-flex flex-column flex-grow-1">
+      <div class="modal-body">
+        <div class="row g-4">
+          <!-- Survey Title -->
+          <div class="col-12">
+            <label class="form-label">Survey Title <span class="text-danger">*</span></label>
+            <input class="form-control" type="text" formControlName="surveyName" placeholder="Enter Survey Title" />
+            <mat-error *ngIf="surveyForm.get('surveyName')?.invalid && surveyForm.get('surveyName')?.touched">
+              Survey title is required and must have at least 2 characters.
+            </mat-error>
+          </div>
+
+          <!-- Survey Description -->
+          <div class="col-12">
+            <label class="form-label">Description <span class="text-danger">*</span></label>
+            <textarea class="form-control" formControlName="surveyDescription" placeholder="Enter Survey Description" rows="3"></textarea>
+            <mat-error *ngIf="surveyForm.get('surveyDescription')?.invalid && surveyForm.get('surveyDescription')?.touched">
+              Description is required and must have at least 5 characters.
+            </mat-error>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer justify-content-center mt-4">
+        <button class="btn btn-primary" type="submit" [disabled]="surveyForm.invalid">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

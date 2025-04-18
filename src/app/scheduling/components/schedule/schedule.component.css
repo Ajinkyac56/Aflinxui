@@ -1,0 +1,127 @@
+/* Remove background color from the calendar */
+.fc {
+  background-color: transparent !important;
+  /* Remove background color */
+}
+
+/* Apply blue bold font to weekdays */
+.fc .fc-day-header {
+  font-weight: bold;
+  color: #1e3a8a;
+  /* Light bold blue color */
+}
+
+/* Apply bold blue color to weekends */
+.fc .weekend-day .fc-daygrid-day-number {
+  font-weight: bold;
+  color: #1e3a8a;
+  /* Light bold blue color */
+}
+
+/* Optional: Add custom styles for the whole weekend */
+.fc .weekend-day {
+  background-color: #f0f8ff;
+  /* Light blue background color for weekends */
+}
+
+/* Ensure the title is aligned in the center */
+.fc-toolbar .fc-toolbar-title {
+  text-align: center !important;
+  /* Make sure the title is centered */
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Ensure the circle image is properly styled */
+.circle-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+ul {
+  margin: 0;
+  /* padding: 0 0 0 1.5em; */
+}
+
+li {
+  /* margin: 1.5em 0; */
+  padding: 0;
+}
+
+b {
+  /* used for event dates/times */
+  margin-right: 3px;
+}
+
+.demo-app {
+  display: flex;
+  min-height: 100%;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.demo-app-sidebar {
+  width: 300px;
+  line-height: 1.5;
+  background: #eaf9ff;
+  border-right: 1px solid #d3e2e8;
+}
+
+.demo-app-sidebar-section {
+  padding: 2em;
+}
+
+.demo-app-main {
+  flex-grow: 1;
+  padding: 3em;
+}
+
+.fc {
+  /* the calendar root */
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.center-dropdown {
+  display: flex;
+  justify-content: center; /* Aligns the content horizontally */
+  align-items: center;
+}
+
+:host::ng-deep .mat-form-field-infix {
+  width: 100% !important;
+}
+.mat-form-field {
+  width: 100% !important;
+}
+
+.img-show {
+  max-width: 100%;
+  max-height: 300px;
+}
+
+:host::ng-deep .mdc-notched-outline {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: 75% !important;
+  text-align: left;
+  pointer-events: none;
+}
+
+:host::ng-deep .mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding: 10px !important;
+}

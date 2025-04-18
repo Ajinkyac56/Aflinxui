@@ -1,0 +1,242 @@
+<div class="container-fluid">
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading"><i class="fa-solid fa-calendar me-2"></i>Schedule</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2"></nav>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/requirement/manage-requirements']" class="text-dark">>&nbsp;Schedule</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a
+        class="nav-link active"
+        aria-current="page"
+        [class.active]="currentTab === 1"
+        (click)="currentTab = 1"
+        (click)="getScheduleAllList()"
+        [ngStyle]="{ 'background-color': currentTab === 1 ? '#0F456B' : '' }">
+        <i class="bi bi-list"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="currentTab === 2"
+        (click)="currentTab = 2"
+        [routerLink]="['/eventScheduler']"
+        routerLinkActive="active"
+        [ngStyle]="{ 'background-color': currentTab === 2 ? '#0F456B' : '' }">
+        <i class="bi bi-calendar"></i>
+      </a>
+    </li>
+  </ul>
+  <div>
+    <div *ngIf="currentTab === 1">
+      <section class="mb-2 mt-4">
+        <div class="mt-2" id="schedule">
+          <form [formGroup]="schedule">
+            <div class="row">
+              <div class="col-md-12 col-lg-4 justify-content-end">
+                <input type="text" class="form-control input" name="search" placeholder="Search Schedule" formControlName="scheduleSearch" />
+              </div>
+              <div class="col-md-12 col-lg-4 justify-content-end">
+                <button class="btn btn-rounded btn-primary w-100 search-btn" matTooltip="Search" (click)="getScheduleAllList()">
+                  <i class="ti ti-search" style="font-size: 21px"></i>
+                </button>
+              </div>
+            </div>
+            <div>
+              <div style="overflow-x: auto" class="card mt-4 mb-5">
+                <table class="table table-striped">
+                  <thead class="table-head">
+                    <tr>
+                      <th scope="col" class="table-heading">
+                        <input
+                          class="form-check-input success checkAll"
+                          type="checkbox"
+                          value="mycheckbox1"
+                          id="checkAll"
+                          (change)="checkBoxValueClicked($event, 'all', undefined)" />
+                      </th>
+                      <th scope="col" class="table-heading"></th>
+                      <th scope="col" class="table-heading">Requirement</th>
+                      <th scope="col" class="table-heading"></th>
+                      <th scope="col" class="table-heading">First Name</th>
+                      <th scope="col" class="table-heading">Last Name</th>
+                      <th scope="col" class="table-heading">Date</th>
+                      <th scope="col" class="table-heading">Time</th>
+                      <th scope="col" class="table-heading">Status</th>
+                      <th scope="col" class="table-heading" style="color: #5a6a85; width: 100px">
+                        <div class="dropdown dropstart">
+                          <a
+                            href="#"
+                            class="fw-bolder"
+                            id="dropdownMenuButton"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            style="color: #5a6a85">
+                            Action <i class="fa fa-caret-down fs-2 ml-2" style="color: #0f456b"></i>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li>
+                              <a class="dropdown-item d-flex align-items-center gap-3" (click)="downloadTableData()">
+                                <i class="fs-4 ti ti-download" style="color: #0f456b"></i>Download
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="schedule-table">
+                    <tr *ngFor="let schedule of scheduleData">
+                      <td>
+                        <input
+                          class="form-check-input success"
+                          type="checkbox"
+                          [id]="'scheduleCheckbox' + schedule.requirement"
+                          (change)="checkBoxValueClicked($event, '', scheduleData)" />
+                      </td>
+                      <td>
+                        <img
+                          [src]="schedule.requirementLogo ? schedule.requirementLogo : 'assets/images/profile/user-1.jpg'"
+                          alt=""
+                          class="circle-image" />
+                      </td>
+                      <td>{{ schedule.requirement }}</td>
+                      <td>
+                        <img
+                          [src]="schedule.profilePicture ? schedule.profilePicture : 'assets/images/profile/user-1.jpg'"
+                          alt=""
+                          class="circle-image" />
+                      </td>
+                      <td>{{ schedule.firstName }}</td>
+                      <td>{{ schedule.lastName }}</td>
+                      <td>{{ schedule.date }}</td>
+                      <td>{{ schedule.time }}</td>
+                      <td>{{ schedule.status }}</td>
+                      <td>
+                        <!-- Conditionally show the full action menu or distinct buttons based on expandAction -->
+                        <ng-container *ngIf="expandAction; else showButtons">
+                          <div class="dropdown dropstart">
+                            <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="ti ti-dots fs-5" style="color: #0f456b"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <li>
+                                <a class="dropdown-item d-flex align-items-center gap-3" (click)="onViewClick()">
+                                  <i class="fa-solid fa-eye" style="color: #0f456b"></i>View
+                                </a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item d-flex align-items-center gap-3" (click)="onStatusClick('Complete', schedule.appMessageId)">
+                                  <i class="fa-solid fa-circle-check" style="color: #0f456b"></i>Complete
+                                </a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item d-flex align-items-center gap-3" (click)="onStatusClick('not show', schedule.appMessageId)">
+                                  <i class="fa-solid fa-eye-slash" style="color: #0f456b"></i>No Show
+                                </a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item d-flex align-items-center gap-3" (click)="onStatusClick('Cancel', schedule.appMessageId)">
+                                  <i class="fa-solid fa-xmark" style="color: #0f456b"></i>Cancel
+                                </a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item d-flex align-items-center gap-3" (click)="handleRescheduleClick(schedule)">
+                                  <i class="fas fa-wand-magic" style="color: #0f456b"></i>Reschedule
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </ng-container>
+
+                        <!-- Show three action buttons distinctly with a More button if expandAction is false -->
+                        <ng-template #showButtons>
+                          <div class="d-flex align-items-center" style="gap: 15px">
+                            <a (click)="onViewClick()" class="text-muted" title="View" style="cursor: pointer">
+                              <i class="fs-3 fa-solid fa-eye" style="color: #0f456b"></i>
+                            </a>
+                            <a (click)="onStatusClick('Complete', schedule.appMessageId)" class="text-muted" title="Complete" style="cursor: pointer">
+                              <i class="fs-3 fa-solid fa-circle-check" style="color: #0f456b"></i>
+                            </a>
+                            <a (click)="onStatusClick('No Show', schedule.appMessageId)" class="text-muted" title="No Show" style="cursor: pointer">
+                              <i class="fs-3 fa-solid fa-eye-slash" style="color: #0f456b"></i>
+                            </a>
+                            <!-- More button to show additional actions -->
+                            <div class="dropdown dropstart">
+                              <a href="#" class="text-muted" id="moreDropdown" data-bs-toggle="dropdown" aria-expanded="false" title="More">
+                                <i class="fs-4 ti ti-dots" style="color: #0f456b"></i>
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="moreDropdown">
+                                <li>
+                                  <a class="dropdown-item d-flex align-items-center gap-3" (click)="onStatusClick('Cancel', schedule.appMessageId)">
+                                    <i class="fa-solid fa-xmark" style="color: #0f456b"></i>Cancel
+                                  </a>
+                                </li>
+                                <li>
+                                  <a (click)="handleRescheduleClick(schedule)" class="dropdown-item d-flex align-items-center gap-3">
+                                    <i class="fas fa-wand-magic" style="color: #0f456b"></i>Reschedule
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+    <div *ngIf="currentTab === 2">
+      <div class="demo-app">
+        <div class="container mt-3">
+          <div class="row">
+            <!-- Select Days Section -->
+            <div class="col-md-3">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-select formControlName="days" placeholder="Select Days" multiple (selectionChange)="onDaysSelect($event)">
+                  <mat-option *ngFor="let day of DaysList" [value]="day">
+                    {{ day }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Full Calendar Section -->
+          <div class="row mt-3">
+            <div class="col-12">
+              <full-calendar *ngIf="calendarVisible()" [options]="calendarOptions()">
+                <ng-template #eventContent let-arg>
+                  <b>{{ arg.timeText }}</b>
+                  <i>{{ arg.event.title }}</i>
+                </ng-template>
+              </full-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

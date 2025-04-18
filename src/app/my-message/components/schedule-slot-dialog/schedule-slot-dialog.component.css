@@ -1,0 +1,51 @@
+.move-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.container-fluid {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.modal-content {
+  border-radius: 15px;
+}
+
+.container-fluid {
+  padding: 1rem;
+  width: 422px;
+  height: auto;
+}
+
+.btn-close {
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  /* Light background on hover */
+  border-radius: 50%;
+  /* Make the close button round */
+}
+
+.mat-form-field {
+  width: 100% !important;
+}
+:host::ng-deep .mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding: 10px !important;
+}

@@ -1,0 +1,517 @@
+<div class="container-fluid">
+  <!-- Profile Header -->
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading"><i class="fa-solid fa-user me-2"></i> My Profile</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/requirement/manage-requirements']" class="text-dark">>&nbsp;My Profile</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile -->
+  <div class="col-lg-12 mx-auto">
+    <div class="p-4">
+      <div class="row align-items-center">
+        <div class="col-md-3 text-center">
+          <img
+            [src]="user?.photo ? user.photo : 'assets/images/profile/user-1.jpg'"
+            alt="Profile Picture"
+            class="rounded-circle border"
+            style="width: 120px; height: 120px" />
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-12 text-start">
+              <h5 class="fw-bold mb-3">{{ user?.fullName }}</h5>
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <p class="mb-2"><b>Defense ID Number:</b> {{ user?.dodId }}</p>
+              <p class="mb-2"><b>Role:</b> {{ user?.userType }}</p>
+            </div>
+            <div class="col-md-6">
+              <p class="mb-2"><b>Military Email:</b> {{ user?.email }}</p>
+              <p class="mb-2"><b>Squadron/Group:</b> {{ getSquadronName(user?.squadronId) }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Updated div -->
+        <div class="col-md-3 d-flex justify-content-center align-items-end bg-light-success p-2 rounded">
+          <div class="d-flex flex-column text-center">
+            <p class="mb-1"><b>Readiness:</b></p>
+            <p class="mb-0">
+              <b>{{ user?.readinessScore }} %</b>
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4" />
+    </div>
+  </div>
+
+  <!-- Work Section -->
+  <div class="accordion mt-2" id="mainAccordion">
+    <!-- Requirements Table -->
+    <div *ngIf="hasAccessToReadinessView" class="accordion-item">
+      <h2 class="accordion-header" id="headingReadiness">
+        <div class="col-auto ms-auto d-flex align-items-center">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseReadiness"
+            aria-expanded="false"
+            aria-controls="collapseReadiness">
+            Readiness
+          </button>
+        </div>
+      </h2>
+      <div id="collapseReadiness" class="accordion-collapse collapse" aria-labelledby="headingWork" data-bs-parent="#mainAccordion">
+        <div class="accordion-body">
+          <ng-container *ngIf="userRequirementData?.length > 0; else noRecords">
+            <div class="row mt-3 px-3">
+              <div class="col-12 mt-3">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Requirement</th>
+                      <th>Status</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of userRequirementData">
+                      <td>{{ data.requirementName }}</td>
+                      <td
+                        [class.text-danger]="data.requirementStatus?.toUpperCase() === 'R'"
+                        [class.text-warning]="data.requirementStatus?.toUpperCase() === 'Y'"
+                        [class.text-success]="data.requirementStatus?.toUpperCase() === 'G'">
+                        {{ data.requirementStatus }}
+                      </td>
+                      <td>{{ data.readinessScore }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacing Between Sections -->
+    <div class="my-3"></div>
+    <!-- Work Section -->
+    <div *ngIf="hasAccessToWorkView" class="accordion-item">
+      <h2 class="accordion-header" id="headingWork">
+        <div class="col-auto ms-auto d-flex align-items-center">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseWork"
+            aria-expanded="false"
+            aria-controls="collapseWork">
+            Work
+          </button>
+          <button *ngIf="hasAccessToWorkAdd" class="btn btn-primary btn-sm me-2" (click)="openWorkDialog()">Add</button>
+        </div>
+      </h2>
+      <div id="collapseWork" class="accordion-collapse collapse" aria-labelledby="headingWork" data-bs-parent="#mainAccordion">
+        <div class="accordion-body">
+          <ng-container *ngIf="workData?.length > 0; else noRecords">
+            <div *ngFor="let work of workData" class="row mt-3 px-3">
+              <div class="col-lg-4">
+                <p><b>Category:</b> {{ getCategoryName(work.categoryId) }}</p>
+                <p><b>Sub-category:</b> {{ getSubCategoryName(work.subCategoryId) }}</p>
+                <p><b>Job Title:</b> {{ work.jobTitle }}</p>
+              </div>
+              <div class="col-lg-4">
+                <p><b>Company Name:</b> {{ work.companyName }}</p>
+                <p><b>Description:</b> {{ work.workDescription }}</p>
+                <p><b>Work Type:</b> {{ work.workType }}</p>
+              </div>
+              <div class="col-lg-4">
+                <p><b>Start Date:</b> {{ work.workStartDate | date : 'MM/dd/yyyy' }}</p>
+                <p><b>End Date:</b> {{ work.workEndDate | date : 'MM/dd/yyyy' }}</p>
+                <p>
+                  <b>File Upload:</b>
+                  <span class="rounded p-1 bg-light-success text-dark">{{ work.fileName }}</span>
+                  <a href="javascript:void(0)" (click)="downloadFile(work.fileName)">
+                    <img class="ms-2" src="assets/image/partner-details/download2.svg" />
+                  </a>
+                </p>
+              </div>
+              <div class="d-flex justify-content-end">
+                <a *ngIf="hasAccessToWorkEdit" href="javascript:void(0)" class="text-dark me-3" (click)="openWorkDialog(work)">
+                  <i class="bi bi-pencil-square fs-5"></i>
+                </a>
+                <a *ngIf="hasAccessToWorkDelete" href="javascript:void(0)" class="text-danger" (click)="deleteWork(work.workId)">
+                  <i class="bi bi-trash fs-5"></i>
+                </a>
+              </div>
+              <hr />
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <!-- Spacing Between Sections -->
+    <div class="my-3"></div>
+    <!-- Education Section -->
+
+    <div *ngIf="hasAccessToEducationView" class="accordion-item">
+      <h2 class="accordion-header" id="headingEducation">
+        <div class="col-auto ms-auto d-flex align-items-center">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseEducation"
+            aria-expanded="false"
+            aria-controls="collapseEducation">
+            Education
+          </button>
+
+          <button *ngIf="hasAccessToEducationAdd" class="btn btn-primary btn-sm me-2" (click)="openEducationDialog()">Add</button>
+        </div>
+      </h2>
+      <div id="collapseEducation" class="accordion-collapse collapse" aria-labelledby="headingEducation">
+        <div class="accordion-body">
+          <ng-container *ngIf="educationData?.length > 0; else noRecords">
+            <div *ngFor="let education of educationData" class="row mt-3 px-3">
+              <div class="col-lg-4">
+                <p><b>Category</b> {{ getCategoryName(education.categoryId) }}</p>
+                <p><b>Degree:</b> {{ education.certificateEarned }}</p>
+              </div>
+              <div class="col-lg-4">
+                <p><b>School Name:</b> {{ education.nameOfTheAccreditedSchool }}</p>
+                <p><b>Graduation Year:</b> {{ education.graduationYear }}</p>
+              </div>
+              <div class="col-lg-4">
+                <p><b>Field of Study:</b> {{ education.fieldOfStudy }}</p>
+                <p>
+                  <b>File Upload:</b>
+                  <span class="rounded p-1 bg-light-success text-dark">{{ education.fileName }}</span>
+                  <a href="javascript:void(0)" (click)="downloadFile(education.fileName)">
+                    <img class="ms-2" src="assets/image/partner-details/download2.svg" />
+                  </a>
+                </p>
+              </div>
+              <div class="d-flex justify-content-end">
+                <a *ngIf="hasAccessToEducationEdit" href="javascript:void(0)" class="text-dark me-3" (click)="openEducationDialog(education)">
+                  <i class="bi bi-pencil-square fs-5"></i>
+                </a>
+                <a *ngIf="hasAccessToEducationDelete" href="javascript:void(0)" class="text-danger" (click)="deleteEducation(education.educationid)">
+                  <i class="bi bi-trash fs-5"></i>
+                </a>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacing Between Sections -->
+    <div class="my-3"></div>
+    <!-- Training Section -->
+    <div *ngIf="hasAccessToTrainingView" class="accordion-item">
+      <h2 class="accordion-header" id="headingTraining">
+        <div class="col-auto ms-auto d-flex align-items-center">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTraining"
+            aria-expanded="false"
+            aria-controls="collapseTraining">
+            Training
+          </button>
+
+          <button *ngIf="hasAccessToTrainingAdd" class="btn btn-primary btn-sm me-2" (click)="openTrainingDialog()">Add</button>
+        </div>
+      </h2>
+      <div id="collapseTraining" class="accordion-collapse collapse" aria-labelledby="headingTraining">
+        <div class="accordion-body">
+          <ng-container *ngIf="trainingData?.length > 0; else noRecords">
+            <div *ngFor="let training of trainingData" class="row mt-3 px-3">
+              <div class="col-lg-4">
+                <p><b>Title:</b> {{ training.trainingTitle }}</p>
+                <p><b>Start Date:</b> {{ training.startDate | date : 'MM/dd/yyyy' }}</p>
+              </div>
+              <div class="col-lg-4">
+                <p><b>Expiration Date:</b> {{ training.expirationDate | date : 'MM/dd/yyyy' }}</p>
+                <p><b>Granted By:</b> {{ training.grantedBy }}</p>
+              </div>
+              <div class="col-lg-4">
+                <p>
+                  <b>File Upload:</b>
+                  <span class="rounded p-1 bg-light-success text-dark">{{ training.fileName }}</span>
+                  <a href="javascript:void(0)" (click)="downloadFile(training.fileName)">
+                    <img class="ms-2" src="assets/image/partner-details/download2.svg" />
+                  </a>
+                </p>
+              </div>
+              <div class="d-flex justify-content-end">
+                <a *ngIf="hasAccessToTrainingEdit" href="javascript:void(0)" class="text-dark me-3" (click)="openTrainingDialog(training)">
+                  <i class="bi bi-pencil-square fs-5"></i>
+                </a>
+                <a *ngIf="hasAccessToTrainingDelete" href="javascript:void(0)" class="text-danger" (click)="deleteTraining(training.trainingId)">
+                  <i class="bi bi-trash fs-5"></i>
+                </a>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacing Between Sections -->
+    <div class="my-3"></div>
+
+    <!-- Certification Section -->
+    <div *ngIf="hasAccessToCertificationView" class="accordion-item">
+      <h2 class="accordion-header" id="headingCertification">
+        <div class="col-auto ms-auto d-flex align-items-center">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseCertification"
+            aria-expanded="false"
+            aria-controls="collapseCertification">
+            Certification
+          </button>
+          <button *ngIf="hasAccessToCertificationAdd" class="btn btn-primary btn-sm me-2" (click)="openCertificationDialog()">Add</button>
+        </div>
+      </h2>
+      <div id="collapseCertification" class="accordion-collapse collapse" aria-labelledby="headingCertification">
+        <div class="accordion-body">
+          <ng-container *ngIf="certificationData?.length > 0; else noRecords">
+            <div *ngFor="let certification of certificationData">
+              <div class="row mt-3 px-3">
+                <div class="col-md-12 col-lg-4">
+                  <p><b>Category:</b> {{ getCategoryName(certification.categoryId) }}</p>
+                  <p><b>Sub-category:</b> {{ getSubCategoryName(certification.subCategoryId) }}</p>
+                  <p><b>Title of License or Certificate:</b> {{ certification.titleOfLicense }}</p>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                  <p><b>Date Obtained:</b> {{ certification.certificateDate | date : 'MM/dd/yyyy' }}</p>
+                  <p><b>Expiration Date:</b> {{ certification.expirationDate | date : 'MM/dd/yyyy' }}</p>
+                  <p><b>Granted By:</b> {{ certification.grantedBy }}</p>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                  <p>
+                    <b>Upload a copy of the degree or certification:</b>
+                    <ng-container>
+                      <span class="rounded p-1 bg-light-success text-dark">{{ certification.certificationDocumentName }}</span>
+                      <a href="javascript:void(0)" (click)="downloadFile(certification.certificationDocumentName)">
+                        <img class="ms-2" src="assets/image/partner-details/download2.svg" />
+                      </a>
+                    </ng-container>
+                  </p>
+                </div>
+              </div>
+              <div class="d-flex align-items-end justify-content-end">
+                <a
+                  *ngIf="hasAccessToCertificationEdit"
+                  href="javascript:void(0)"
+                  class="text-dark me-3"
+                  title="Edit Work"
+                  (click)="openCertificationDialog(certification)">
+                  <i class="bi bi-pencil-square fs-5"></i>
+                </a>
+                <a
+                  *ngIf="hasAccessToCertificationDelete"
+                  href="javascript:void(0)"
+                  style="color: red; text-decoration: none"
+                  title="Delete Work"
+                  (click)="deleteCertification(certification.certificateId)">
+                  <i class="bi bi-trash fs-5"></i>
+                </a>
+              </div>
+              <hr />
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacing Between Sections -->
+    <div class="my-3"></div>
+    <!-- License Section -->
+    <div *ngIf="hasAccessToLicenseView" class="accordion-item">
+      <h2 class="accordion-header" id="headingLicense">
+        <div class="col-auto ms-auto d-flex align-items-center">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseLicense"
+            aria-expanded="false"
+            aria-controls="collapseLicense">
+            License
+          </button>
+          <button *ngIf="hasAccessToLicenseAdd" class="btn btn-primary btn-sm me-2" (click)="openLicenseDialog()">Add</button>
+        </div>
+      </h2>
+      <div id="collapseLicense" class="accordion-collapse collapse" aria-labelledby="headingLicense">
+        <div class="accordion-body">
+          <ng-container *ngIf="licenseData?.length > 0; else noRecords">
+            <div *ngFor="let license of licenseData" class="row mt-3 px-3">
+              <div class="col-lg-4">
+                <p><b>Category:</b> {{ getCategoryName(license.categoryId) }}</p>
+                <p><b>Sub-category:</b> {{ getSubCategoryName(license.subCategoryId) }}</p>
+                <p><b>License Title:</b> {{ license.licenseTitle }}</p>
+              </div>
+              <div class="col-lg-4">
+                <p><b>License Date:</b> {{ license.licenseDate | date : 'MM/dd/yyyy' }}</p>
+                <p><b>License Expiry Date:</b> {{ license.licenseExpireDate | date : 'MM/dd/yyyy' }}</p>
+                <p><b>Granted By:</b> {{ license.grantedBy }}</p>
+              </div>
+              <div class="col-lg-4">
+                <p>
+                  <b>Upload a copy of the License:</b>
+                  <span class="rounded p-1 bg-light-success text-dark">{{ license.fileName }}</span>
+                  <a href="javascript:void(0)" (click)="downloadFile(license.fileName)">
+                    <img class="ms-2" src="assets/image/partner-details/download2.svg" />
+                  </a>
+                </p>
+              </div>
+              <div class="d-flex justify-content-end">
+                <a *ngIf="hasAccessToLicenseEdit" href="javascript:void(0)" class="text-dark me-3" (click)="openLicenseDialog(license)">
+                  <i class="bi bi-pencil-square fs-5"></i>
+                </a>
+                <a *ngIf="hasAccessToLicenseDelete" href="javascript:void(0)" class="text-danger" (click)="deleteLicense(license.licensesId)">
+                  <i class="bi bi-trash fs-5"></i>
+                </a>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <!-- Spacing Between Sections -->
+    <div class="my-3"></div>
+    <!-- Documentation Section -->
+    <div *ngIf="hasAccessToDocumentationView" class="accordion-item">
+      <h2 class="accordion-header" id="headingDocumentation">
+        <div class="col-auto ms-auto d-flex align-items-center">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseDocumentation"
+            aria-expanded="false"
+            aria-controls="collapseDocumentation">
+            Documentation
+          </button>
+          <button *ngIf="hasAccessToDocumentationAdd" class="btn btn-primary btn-sm me-2" (click)="openDocumentationDialog()">Add</button>
+        </div>
+      </h2>
+      <div id="collapseDocumentation" class="accordion-collapse collapse" aria-labelledby="headingDocumentation">
+        <div class="accordion-body">
+          <ng-container *ngIf="documentationData?.length > 0; else noRecords">
+            <div *ngFor="let document of documentationData" class="row mt-3 px-3">
+              <div class="col-lg-6">
+                <p><b>Type of Documentation:</b> {{ document.typeOfDocumentation }}</p>
+                <p><b>Title:</b> {{ document.documentTitle }}</p>
+              </div>
+              <div class="col-lg-6">
+                <p><b>Description:</b> {{ document.documentDescription }}</p>
+                <p>
+                  <b>Upload a copy:</b>
+                  <span class="rounded p-1 bg-light-success text-dark">{{ document.fileName }}</span>
+                  <a href="javascript:void(0)" (click)="downloadFile(document.fileName)">
+                    <img class="ms-2" src="assets/image/partner-details/download2.svg" />
+                  </a>
+                </p>
+              </div>
+              <div class="d-flex justify-content-end">
+                <a *ngIf="hasAccessToDocumentationEdit" href="javascript:void(0)" class="text-dark me-3" (click)="openDocumentationDialog(document)">
+                  <i class="bi bi-pencil-square fs-5"></i>
+                </a>
+                <a *ngIf="hasAccessToDocumentationDelete" href="javascript:void(0)" class="text-danger" (click)="deleteDocument(document.documentId)">
+                  <i class="bi bi-trash fs-5"></i>
+                </a>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <!-- Spacing Between Sections -->
+    <div class="my-3"></div>
+    <!-- Letters of Designation Section -->
+    <div *ngIf="hasAccessToLetterOfDesignationView" class="accordion-item">
+      <h2 class="accordion-header" id="headingLetterOfDesignation">
+        <div class="col-auto ms-auto d-flex align-items-center">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseLetterOfDesignation"
+            aria-expanded="false"
+            aria-controls="collapseLetterOfDesignation">
+            Letters of Designation
+          </button>
+          <button *ngIf="hasAccessToLetterOfDesignationAdd" class="btn btn-primary btn-sm me-2" (click)="openDesignationDialog()">Add</button>
+        </div>
+      </h2>
+      <div id="collapseLetterOfDesignation" class="accordion-collapse collapse" aria-labelledby="headingLetterOfDesignation">
+        <div class="accordion-body">
+          <ng-container *ngIf="designationData?.length > 0; else noRecords">
+            <div *ngFor="let designation of designationData" class="row mt-3 px-3">
+              <div class="col-lg-4">
+                <p><b>Category:</b> {{ getCategoryName(designation.categoryId) }}</p>
+                <p><b>Sub-Category:</b> {{ getSubCategoryName(designation.subCategoryId) }}</p>
+              </div>
+              <div class="col-lg-4">
+                <p><b>Title:</b> {{ designation.designationTitle }}</p>
+                <p><b>Granted By:</b> {{ designation.grantedBy }}</p>
+              </div>
+              <div class="col-lg-4">
+                <p><b>Designation Date:</b> {{ designation.designationDate | date : 'MM/dd/yyyy' }}</p>
+                <p><b>Expiration Date:</b> {{ designation.expirationDate | date : 'MM/dd/yyyy' }}</p>
+              </div>
+              <div class="d-flex justify-content-end">
+                <a
+                  *ngIf="hasAccessToLetterOfDesignationEdit"
+                  href="javascript:void(0)"
+                  class="text-dark me-3"
+                  (click)="openDesignationDialog(designation)">
+                  <i class="bi bi-pencil-square fs-5"></i>
+                </a>
+                <a
+                  *ngIf="hasAccessToLetterOfDesignationDelete"
+                  href="javascript:void(0)"
+                  class="text-danger"
+                  (click)="deleteDesignation(designation.designationId)">
+                  <i class="bi bi-trash fs-5"></i>
+                </a>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noRecords>
+    <p class="text-center mt-3">No records available</p>
+  </ng-template>
+</div>

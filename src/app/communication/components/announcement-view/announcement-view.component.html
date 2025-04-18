@@ -1,0 +1,166 @@
+<div class="container-fluid">
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading">Announcement - {{ announcementList.messageTitle }}</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a class="text-dark">>&nbsp;Announcement</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt-4">
+    <!-- Search Bar and Add Button -->
+    <form [formGroup]="userSearchForm">
+      <div class="d-flex align-items-center">
+        <div class="row g-3 align-items-center flex-grow-1">
+          <div class="col-md-6 col-lg-3">
+            <input type="text" class="form-control input" formControlName="name" placeholder="Enter Announcement" />
+          </div>
+          <div class="col-md-1 col-lg-1">
+            <button class="btn btn-primary" (click)="searchAnnouncementUser(true)">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+          <div class="col-md-1 col-lg-1">
+            <button class="btn btn-primary w-100 reset-btn" type="button" matTooltip="Refresh" (click)="resetFilter()">
+              <i class="fs-7 ti ti-refresh"></i>
+            </button>
+          </div>
+          <div *ngIf="announcementList.messageType === 'Poll'" class="col-md-1 col-lg-1">
+            <button class="btn btn-primary w-100 reset-btn" type="button" matTooltip="Poll Summary" (click)="onSummaryShow()">
+              <i class="fs-7 ti ti-eye"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- The poll Summary Card -->
+    <!-- <div class="card mt-3">
+      <div class="card-header mb-0">
+        Summary
+      </div>
+      <div class="card-body">
+        <div class="container">
+          <div class="row align-items-top">
+            <div class="col-md-3">
+              <span style="font-weight: bold;">Total Users :</span>
+            </div>
+            <div class="col-md-3">
+              <span style="font-weight: bold;">
+                User Responded :
+              </span>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex">
+                <span class="mr-4" style="font-weight: bold;">Poll Options :</span> &nbsp; &nbsp;
+               Loop through pollResponsePercentage and display each option in rows -->
+    <!-- <div class="d-flex flex-wrap w-100">
+                  <div *ngFor="let response of pollResponsePercentage; let i = index"
+                    class="poll-option col-6 col-sm-4 mb-2">
+                    <span>{{ response.pollOptionName }}: {{ response.percentage }}%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Nudge Groups Table -->
+    <div style="overflow-x: auto" class="card mt-5 mb-5">
+      <table class="table table-striped pb-4">
+        <thead class="table-head">
+          <tr>
+            <th scope="col" class="table-heading">
+              <input
+                class="form-check-input success checkAll"
+                type="checkbox"
+                value="mycheckbox1"
+                id="checkAll"
+                (change)="checkBoxValueClicked($event, 'all', undefined)" />
+            </th>
+            <th scope="col" class="table-heading">Profile Picture</th>
+            <th scope="col" class="table-heading">First Name</th>
+            <th scope="col" class="table-heading">Last Name</th>
+            <th scope="col" class="table-heading">Email</th>
+            <th scope="col" class="table-heading">Role</th>
+            <th scope="col" class="table-heading">Status</th>
+            <th scope="col" class="table-heading" style="color: #5a6a85; width: 100px">
+              <div class="dropdown dropstart">
+                <a href="#" class="fw-bolder" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="color: #5a6a85">
+                  Action <i class="fa fa-caret-down fs-2 ml-2" style="color: #0f456b"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center gap-3" (click)="downloadTableData()">
+                      <i class="fs-4 ti ti-download" style="color: #0f456b"></i>Download
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="announcement-table">
+          <tr *ngFor="let announcement of announcementUserList">
+            <td>
+              <input
+                class="form-check-input success"
+                type="checkbox"
+                [id]="'announcementCheckbox' + announcement.id"
+                (change)="checkBoxValueClicked($event, '', announcementUserList)" />
+            </td>
+            <td>
+              <img
+                [src]="announcement.profilePicture ? announcement.profilePicture : 'assets/images/profile/user-1.jpg'"
+                alt="Profile Picture"
+                class="rounded-circle border"
+                style="width: 30px; height: 30px" />
+            </td>
+            <td>{{ announcement.firstName }}</td>
+            <td>{{ announcement.lastName }}</td>
+            <td>{{ announcement.email }}</td>
+            <td>{{ announcement.role }}</td>
+            <td [ngClass]="announcement.viewed ? 'text-success' : 'text-danger'">
+              {{ announcement.viewed ? 'Seen' : 'Unseen' }}
+            </td>
+            <td>
+              <a class="dropdown-item d-flex align-items-center gap-3" (click)="onViewClick(announcement)">
+                <i class="fa-solid fa-eye" style="color: #0f456b"></i>
+              </a>
+            </td>
+            <!-- <td>
+              <div class="dropdown dropstart">
+                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="ti ti-dots fs-5" style="color: #0f456b"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center gap-3">
+                      <i class="fas fa-trash" style="color: #ff0000"></i>Delete
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </td> -->
+          </tr>
+        </tbody>
+      </table>
+      <div class="col-sm-6 align-self-center" style="width: 200px">
+        <a class="btn d-flex fw-bolder" *ngIf="!noMoreRecords" id="loadMore" (click)="loadMoreRecord()">Load More...</a>
+      </div>
+    </div>
+  </div>
+</div>

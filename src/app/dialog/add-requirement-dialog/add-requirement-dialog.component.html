@@ -1,0 +1,45 @@
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content requirement-dialog p-4">
+    <div class="modal-header border-bottom pb-3">
+      <h5 class="modal-title">{{ data ? 'Edit Requirement Weight' : 'Add Requirement Weight' }}</h5>
+      <button type="button" class="btn-close" (click)="closeDialog()"></button>
+    </div>
+    <form [formGroup]="requirementWeightForm" (ngSubmit)="submitForm()">
+      <div class="modal-body flex-grow-1">
+        <div class="row g-4">
+          <div class="col-12">
+            <label for="requirementName" class="form-label">Requirement<span style="color: red">*</span></label>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select formControlName="requirementId" placeholder="Select Requirement ">
+                <ngx-mat-select-search
+                  [formControl]="requirementSearchControl"
+                  placeholderLabel="Search Requirement"
+                  noEntriesFoundLabel="Data not found">
+                </ngx-mat-select-search>
+                <mat-option *ngFor="let item of requirementData" [value]="item.id">
+                  {{ item.reqName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-12">
+            <label for="weightInput" class="form-label">Weight %<span style="color: red">*</span></label>
+            <input class="form-control" type="text" id="weightInput" formControlName="weight" placeholder="Enter Weight %" />
+            <div
+              class="text-danger"
+              *ngIf="requirementWeightForm.get('weight')?.touched && requirementWeightForm.get('weight')?.hasError('required')">
+              Weight is required.
+            </div>
+            <div class="text-danger" *ngIf="requirementWeightForm.get('weight')?.hasError('pattern')">
+              Weight must be a valid percentage between 0 and 100.
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center pt-3">
+          <button class="btn btn-primary" type="submit" [disabled]="requirementWeightForm.invalid">SAVE</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

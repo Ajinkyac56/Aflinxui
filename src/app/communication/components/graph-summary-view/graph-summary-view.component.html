@@ -1,0 +1,39 @@
+<div class="modal-dialog modal-dialog-centered modal-xl" style="min-width: 508px">
+  <!-- Increased width -->
+  <div class="modal-content requirement-dialog p-4">
+    <!-- Modal Header -->
+    <div class="modal-header mb-3 d-flex">
+      <h5 class="modal-title fw-bold">Poll Summary</h5>
+      <!-- Close Button Aligned Right -->
+      <button type="button" class="btn-close bg-light ms-auto" (click)="closeDialog()" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body px-3 d-flex justify-content-center align-items-center">
+      <div class="row w-100">
+        <div class="col-md-6 d-flex justify-content-center">
+          <canvas
+            baseChart
+            [type]="'pie'"
+            [datasets]="pieChartDatasets"
+            [labels]="pieChartLabels"
+            [options]="pieChartOptions"
+            [plugins]="pieChartPlugins"
+            [legend]="pieChartLegend">
+          </canvas>
+        </div>
+
+        <div class="col-md-6 d-flex flex-column align-items-center">
+          <div class="mt-3 text-center">
+            <p class="total-users"><strong>Total Users :</strong> {{ totalUsers }}</p>
+            <p class="total-responded-users"><strong>Total Responded Users :</strong> {{ totalRespondedUsers }}</p>
+            <ul class="list-inline flex-wrap">
+              <li *ngFor="let response of pieChartLabels; let i = index" class="list-inline-item response-list-item">
+                <span style="color: black">{{ response }}</span> : {{ responseCount[response] }} ({{ pieChartDatasets[0].data[i] }}%)
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

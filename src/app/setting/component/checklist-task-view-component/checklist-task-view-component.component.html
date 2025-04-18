@@ -1,0 +1,118 @@
+<div class="container-fluid">
+  <!-- Header Card -->
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading"><i class="fa-solid fa-tasks me-2"></i>Checklist Tasks</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-dark">
+              <a class="text-dark">> Checklist Tasks</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tasks Table -->
+  <div class="container-fluid mt-4">
+    <div style="overflow-x: auto" class="card mt-5 mb-5">
+      <table class="table table-striped pb-4">
+        <thead class="table-head">
+          <tr>
+            <th scope="col" class="table-heading">
+              <input class="form-check-input success checkAll" type="checkbox" id="checkAll" (change)="checkBoxValueClicked($event, 'all')" />
+            </th>
+            <th scope="col" class="table-heading">Task Name</th>
+            <th scope="col" class="table-heading">Notes</th>
+            <th scope="col" class="table-heading">Yes/No</th>
+            <th scope="col" class="table-heading">Notes</th>
+            <th scope="col" class="table-heading">Upload</th>
+            <th scope="col" class="table-heading">QR</th>
+            <th scope="col" class="table-heading">Created At</th>
+            <th scope="col" class="table-heading" style="color: #5a6a85; width: 100px">
+              <div class="dropdown dropstart">
+                <a href="#" class="fw-bolder" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="color: #5a6a85">
+                  Action <i class="fa fa-caret-down fs-2 ml-2" style="color: #0f456b"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center gap-3" (click)="downloadTableData()">
+                      <i class="fs-4 ti ti-download" style="color: #0f456b"></i>Download
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="announcement-table">
+          <tr *ngFor="let task of tasks">
+            <td>
+              <input
+                class="form-check-input success"
+                type="checkbox"
+                [id]="'categoryCheckbox' + task.taskId"
+                (change)="checkBoxValueClicked($event, '', task)" />
+            </td>
+            <td>{{ task.taskName }}</td>
+            <td>{{ task.taskNote }}</td>
+            <td [ngClass]="task.showYes ? 'text-success' : 'text-danger'">
+              {{ task.showYes ? 'Yes' : 'No' }}
+            </td>
+            <td [ngClass]="task.showNotes ? 'text-success' : 'text-danger'">
+              {{ task.showNotes ? 'Yes' : 'No' }}
+            </td>
+            <td [ngClass]="task.showUpload ? 'text-success' : 'text-danger'">
+              {{ task.showUpload ? 'Yes' : 'No' }}
+            </td>
+            <td [ngClass]="task.showQr ? 'text-success' : 'text-danger'">
+              {{ task.showQr ? 'Yes' : 'No' }}
+            </td>
+            <td>{{ task.createdAt | date : 'medium' }}</td>
+            <td>
+              <ng-container *ngIf="expandAction; else showButtons">
+                <div class="dropdown dropstart">
+                  <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="ti ti-dots fs-5" style="color: #0f456b"></i>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-3" (click)="openChecklistTaskDialog(task)">
+                        <i class="bi bi-pencil-square fs-5" style="color: #0f456b"></i>Edit
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-3" (click)="deleteChecklistTask(task.taskId, 0)">
+                        <i class="fs-3 fa-solid fa-trash-can" style="color: red"></i>Delete
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </ng-container>
+              <ng-template #showButtons>
+                <div class="btn-group d-flex align-items-center" style="gap: 15px">
+                  <a class="text-muted" matTooltip="Edit" (click)="openChecklistTaskDialog(task)" style="cursor: pointer">
+                    <i class="fs-4 bi bi-pencil-square" style="color: #0f456b"></i>
+                  </a>
+                  <a class="text-muted" matTooltip="Delete" style="cursor: pointer" (click)="deleteChecklistTask(task.taskId, 0)">
+                    <i class="fs-3 fa-solid fa-trash-can" style="color: red"></i>
+                  </a>
+                </div>
+              </ng-template>
+            </td>
+          </tr>
+          <tr *ngIf="tasks.length === 0">
+            <td colspan="7" class="text-center">No tasks available</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

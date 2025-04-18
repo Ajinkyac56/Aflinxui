@@ -1,0 +1,53 @@
+.poll-option {
+  max-width: 100%;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.col-md-6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.response-list-item {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.response-list-item::before {
+  content: '•';
+  margin-right: 10px;
+  color: black;
+  font-size: 14px;
+}
+
+.total-users {
+  margin-bottom: 10px;
+}
+
+.total-users .label {
+  margin-left: 20px;
+}
+
+.total-users .value {
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+.total-responded-users {
+  margin-bottom: 20px;
+}
+
+.total-responded-users .value {
+  margin-left: 5px;
+  font-weight: bold;
+}

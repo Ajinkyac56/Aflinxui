@@ -1,0 +1,7 @@
+.forgot-password-link {
+  display: block;
+  margin-top: 10px;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}

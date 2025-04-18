@@ -1,0 +1,215 @@
+@font-face {
+    font-family: "flaticon_mycollection";
+    src: url("./flaticon_mycollection.ttf?7dfc2ea12e329d5311fdddaf6414c6c3") format("truetype"),
+url("./flaticon_mycollection.woff?7dfc2ea12e329d5311fdddaf6414c6c3") format("woff"),
+url("./flaticon_mycollection.woff2?7dfc2ea12e329d5311fdddaf6414c6c3") format("woff2"),
+url("./flaticon_mycollection.eot?7dfc2ea12e329d5311fdddaf6414c6c3#iefix") format("embedded-opentype"),
+url("./flaticon_mycollection.svg?7dfc2ea12e329d5311fdddaf6414c6c3#flaticon_mycollection") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon_mycollection !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-insurer:before {
+    content: "\f101";
+}
+.flaticon-manage-insurer:before {
+    content: "\f102";
+}
+.flaticon-create-insurer:before {
+    content: "\f103";
+}
+.flaticon-manage-asego-partner-partner-onboarding:before {
+    content: "\f104";
+}
+.flaticon-org-structure:before {
+    content: "\f105";
+}
+.flaticon-create-new-area:before {
+    content: "\f106";
+}
+.flaticon-create-new-branch:before {
+    content: "\f107";
+}
+.flaticon-plan:before {
+    content: "\f108";
+}
+.flaticon-manage-plan:before {
+    content: "\f109";
+}
+.flaticon-manage-coverage:before {
+    content: "\f10a";
+}
+.flaticon-create-cost-plan:before {
+    content: "\f10b";
+}
+.flaticon-create-selling-plan:before {
+    content: "\f10c";
+}
+.flaticon-request-plan:before {
+    content: "\f10d";
+}
+.flaticon-manage-permission:before {
+    content: "\f10e";
+}
+.flaticon-smartboard:before {
+    content: "\f10f";
+}
+.flaticon-assistance-insurance:before {
+    content: "\f110";
+}
+.flaticon-manage-policy:before {
+    content: "\f111";
+}
+.flaticon-search-policy:before {
+    content: "\f112";
+}
+.flaticon-extend-policy:before {
+    content: "\f113";
+}
+.flaticon-cancel-policy:before {
+    content: "\f114";
+}
+.flaticon-authorisation:before {
+    content: "\f115";
+}
+.flaticon-rewards-recognition:before {
+    content: "\f116";
+}
+.flaticon-asego-social:before {
+    content: "\f117";
+}
+.flaticon-help-us-know-you-better:before {
+    content: "\f118";
+}
+.flaticon-help:before {
+    content: "\f119";
+}
+.flaticon-claims:before {
+    content: "\f11a";
+}
+.flaticon-claims-assistance:before {
+    content: "\f11b";
+}
+.flaticon-track-claim-status:before {
+    content: "\f11c";
+}
+.flaticon-claim-assessment:before {
+    content: "\f11d";
+}
+.flaticon-manage-claim:before {
+    content: "\f11e";
+}
+.flaticon-claim-report:before {
+    content: "\f11f";
+}
+.flaticon-upload-documents:before {
+    content: "\f120";
+}
+.flaticon-search-mail:before {
+    content: "\f121";
+}
+.flaticon-claim-log:before {
+    content: "\f122";
+}
+.flaticon-accounts:before {
+    content: "\f123";
+}
+.flaticon-rupees:before {
+    content: "\f124";
+}
+.flaticon-invoice:before {
+    content: "\f125";
+}
+.flaticon-manage-invoice:before {
+    content: "\f126";
+}
+.flaticon-add-receipts:before {
+    content: "\f127";
+}
+.flaticon-adjust-receipts:before {
+    content: "\f128";
+}
+.flaticon-payment:before {
+    content: "\f129";
+}
+.flaticon-create-payment:before {
+    content: "\f12a";
+}
+.flaticon-payment-request:before {
+    content: "\f12b";
+}
+.flaticon-view-voucher:before {
+    content: "\f12c";
+}
+.flaticon-ledger:before {
+    content: "\f12d";
+}
+.flaticon-allot-target:before {
+    content: "\f12e";
+}
+.flaticon-calculate-incentive:before {
+    content: "\f12f";
+}
+.flaticon-create-incentives:before {
+    content: "\f130";
+}
+.flaticon-deficiency:before {
+    content: "\f131";
+}
+.flaticon-under-review:before {
+    content: "\f132";
+}
+.flaticon-approved:before {
+    content: "\f133";
+}
+.flaticon-paid:before {
+    content: "\f134";
+}
+.flaticon-calculator:before {
+    content: "\f135";
+}
+.flaticon-registered:before {
+    content: "\f136";
+}
+.flaticon-fill-the-claim-form:before {
+    content: "\f137";
+}
+.flaticon-manage-org-structure:before {
+    content: "\f138";
+}
+.flaticon-create-policy:before {
+    content: "\f139";
+}
+.flaticon-partner-details:before {
+    content: "\f13a";
+}
+.flaticon-endrse-policy:before {
+    content: "\f13b";
+}
+.flaticon-generate-invoice:before {
+    content: "\f13c";
+}
+.flaticon-manage-receipt:before {
+    content: "\f13d";
+}
+.flaticon-manage-debit-credit-note:before {
+    content: "\f13e";
+}
+.flaticon-debit-credit-note:before {
+    content: "\f13f";
+}
+.flaticon-manage-payment:before {
+    content: "\f140";
+}
+.flaticon-partner-msc:before {
+    content: "\f141";
+}

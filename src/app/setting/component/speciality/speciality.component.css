@@ -1,0 +1,6 @@
+:host::ng-deep .mat-form-field-infix {
+  width: 100% !important;
+}
+.mat-form-field {
+  width: 100% !important;
+}

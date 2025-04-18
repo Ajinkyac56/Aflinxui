@@ -1,0 +1,78 @@
+<div class="container-fluid" style="position: relative">
+  <div class="tab-content mt-1">
+    <form [formGroup]="userList" (ngSubmit)="submitForm()">
+      <section class="mb-4 mt-2">
+        <div class="mt-4" id="userlist">
+          <div style="position: absolute; top: 10px; right: 10px; margin-top: -40px" class="mb-4">
+            <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
+          </div>
+          <div class="w-100 d-flex flex-row justify-content-end">
+            <div class="ml-auto mt-3">
+              <div class="d-flex flex-row">
+                <div>
+                  <input type="text" class="form-control input" name="userName" placeholder="Enter Airman Name" formControlName="userName" />
+                </div>
+                <div class="ml-2">
+                  <button type="button" class="btn btn-primary w-100 search-btn ml-2" (click)="searchUserNudgeGroup(true)">
+                    <i class="ti ti-search" style="font-size: 21px"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Loading Indicator -->
+          <div *ngIf="loading" class="text-center mt-3"><i class="spinner-border text-primary"></i> Loading...</div>
+          <div class="card mt-3 mb-3" style="overflow-x: auto; max-width: 100%; height: 459px; overflow-y: auto">
+            <table class="table table-striped">
+              <thead class="table-head">
+                <tr>
+                  <th>
+                    <input
+                      class="form-check-input success"
+                      type="checkbox"
+                      (change)="checkBoxValueClicked($event, 'all', null)"
+                      [checked]="selectData.length === datafilerecords.length" />
+                  </th>
+                  <th></th>
+                  <th scope="col" class="table-heading">Full Name</th>
+                  <th scope="col" class="table-heading">Email</th>
+                </tr>
+              </thead>
+              <tbody class="insurer-table">
+                <tr *ngFor="let user of datafilerecords">
+                  <td>
+                    <input
+                      class="form-check-input success"
+                      type="checkbox"
+                      (change)="checkBoxValueClicked($event, 'item', user)"
+                      [checked]="isUserSelected(user)" />
+                  </td>
+                  <td>
+                    <div class="user-profile-img">
+                      <img
+                        [src]="user.photo ? user.photo : 'assets/images/profile/user-1.jpg'"
+                        class="rounded-circle"
+                        width="35"
+                        height="35"
+                        alt="" />
+                    </div>
+                  </td>
+                  <td>{{ user.fullName }}</td>
+                  <td>{{ user.email }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- Load More Button -->
+            <div class="col-sm-6 align-self-center" style="width: 200px">
+              <a class="btn d-flex fw-bolder" id="loadMore" (click)="loadMore()" *ngIf="canLoadMore">Load More...</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Navigation Buttons -->
+      <div class="d-flex justify-content-center mt-4 mb-4">
+        <button type="submit" class="btn btn-success px-4">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

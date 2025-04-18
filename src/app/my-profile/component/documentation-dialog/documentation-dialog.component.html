@@ -1,0 +1,54 @@
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content requirement-dialog p-4">
+    <!-- Modal Header -->
+    <div class="modal-header border-bottom pb-3">
+      <h2 mat-dialog-title>{{ data?.documentId ? 'Edit Documentation' : 'Add Documentation' }}</h2>
+      <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
+    </div>
+
+    <form [formGroup]="documentationForm">
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="row g-4 mb-3">
+          <!-- Document Title -->
+          <div class="col-md-12">
+            <label class="form-label">Document Title <span class="text-danger">*</span></label>
+            <input class="form-control" formControlName="documentTitle" placeholder="Enter Document Title" />
+          </div>
+
+          <!-- Description -->
+          <div class="col-md-12">
+            <label class="form-label">Description <span class="text-danger">*</span></label>
+            <textarea class="form-control" formControlName="documentDescription" placeholder="Enter Description"></textarea>
+          </div>
+        </div>
+
+        <div class="row g-4 mb-3">
+          <div class="col-md-12">
+            <label class="form-label">Document Type <span class="text-danger">*</span></label>
+            <input class="form-control" formControlName="typeOfDocumentation" placeholder="Enter Document Title" />
+          </div>
+          <!-- File Upload -->
+          <div class="col-md-12">
+            <label class="form-label">File Upload:</label>
+            <div
+              id="yourFile"
+              (click)="uploadFileClick('upFile-doc')"
+              class="upload-file form-control d-flex align-items-center justify-content-between px-3">
+              <span *ngIf="!userDocumentation && !documentationForm.get('fileName')?.value">Upload File</span>
+              <span *ngIf="userDocumentation">{{ userDocumentation.name }}</span>
+              <span *ngIf="!userDocumentation && documentationForm.get('fileName')?.value">{{ documentationForm.get('fileName')?.value }}</span>
+              <img src="assets/image/onboarding/Upload.svg" alt="Upload Icon" style="width: 20px; height: 20px" />
+            </div>
+            <input id="upFile-doc" type="file" formControlName="fileName" class="form-control d-none" (change)="fileUpload($event)" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer d-flex justify-content-center pt-3">
+        <button class="btn btn-primary px-4 fw-bold" type="submit" (click)="submitDocumentationForm()">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

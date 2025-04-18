@@ -1,0 +1,70 @@
+:host::ng-deep .mdc-notched-outline {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: 70% !important;
+  text-align: left;
+  pointer-events: none;
+}
+
+:host::ng-deep .mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding: 10px !important;
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+:host::ng-deep .modal-dialog {
+  max-width: var(--bs-modal-width) !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  /* width: 100%; */
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+}
+
+:host::ng-deep .mat-mdc-form-field {
+  --mat-mdc-form-field-floating-label-scale: 0.75;
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 100%;
+  text-align: left;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--mat-form-field-container-text-font);
+  line-height: var(--mat-form-field-container-text-line-height);
+  font-size: var(--mat-form-field-container-text-size);
+  letter-spacing: var(--mat-form-field-container-text-tracking);
+  font-weight: var(--mat-form-field-container-text-weight);
+}
+:host::ng-deep .subcategory-input {
+  --mat-mdc-form-field-floating-label-scale: 0.75 !important;
+  display: inline-flex !important;
+  width: 100% !important;
+  flex-direction: column !important;
+  /* min-width: 0; */
+  text-align: left !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  -webkit-font-smoothing: antialiased !important;
+  font-family: var(--mat-form-field-container-text-font) !important;
+  line-height: var(--mat-form-field-container-text-line-height) !important;
+  font-size: var(--mat-form-field-container-text-size) !important;
+  letter-spacing: var(--mat-form-field-container-text-tracking) !important;
+  font-weight: var(--mat-form-field-container-text-weight) !important;
+}
+
+:host::ng-deep .subcategory-title {
+  color: var(--mdc-dialog-subhead-color, rgba(0, 0, 0, 0.87)) !important;
+  padding-left: 0px !important;
+}
+:host::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  padding: 25px !important;
+  transition: transform var(--mat-dialog-transition-duration, 0ms) 0mscubic-bezier(0, 0, 0.2, 1) !important;
+}

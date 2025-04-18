@@ -1,0 +1,41 @@
+.is-invalid {
+  border: 2px solid rgba(255, 0, 0, 0.867);
+}
+.not-allowed {
+  cursor: not-allowed;
+  pointer-events: none; /* Prevent click actions */
+}
+
+.appointment-value {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.has-appointment {
+  background-color: red;
+}
+
+.no-appointment {
+  background-color: green;
+}
+
+:host::ng-deep .mdc-notched-outline {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: 75% !important;
+  text-align: left;
+  pointer-events: none;
+}
+
+:host::ng-deep .mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding: 10px !important;
+}

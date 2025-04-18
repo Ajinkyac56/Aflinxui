@@ -1,0 +1,42 @@
+.modal-header {
+  height: 38px;
+  width: auto;
+}
+.bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #007bff; /* Blue color */
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.me-3 {
+  margin-right: 1rem; /* Spacing between the bullet and the text */
+}
+
+strong {
+  margin-right: 0.5rem; /* Spacing between the label (Title, Message, etc.) and the value */
+}
+
+/* Optional: Hover effect on the bullet */
+.bullet:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s ease-in-out;
+}
+.btn-close {
+  border-radius: 50%; /* Rounded close button */
+  background-color: rgba(0, 0, 0, 0.1); /* Optional background to make the button stand out */
+  /* padding: 0.5rem; Padding for the close button */
+}

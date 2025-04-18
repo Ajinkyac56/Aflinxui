@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="177" height="60" viewBox="0 0 177 60">
+  <defs>
+    <filter id="Rectangle_12086" x="0" y="0" width="177" height="60" filterUnits="userSpaceOnUse">
+      <feOffset dx="-2" dy="-2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-opacity="0.251"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_31160" data-name="Group 31160" transform="translate(-335 -494)">
+    <g transform="matrix(1, 0, 0, 1, 335, 494)" filter="url(#Rectangle_12086)">
+      <rect id="Rectangle_12086-2" data-name="Rectangle 12086" width="147" height="30" rx="15" transform="translate(17 17)" fill="#e765e0"/>
+    </g>
+    <text id="BEST_SELLING" data-name="BEST SELLING" transform="translate(386 531.091)" fill="#fff" font-size="14" font-family="Mulish-Bold, Mulish" font-weight="700"><tspan x="0" y="0">BEST SELLING</tspan></text>
+    <path id="Icon_awesome-award" data-name="Icon awesome-award" d="M3.285,12.267c-.294-.294-.141-.211-.85-.4a2.441,2.441,0,0,1-.86-.451L.041,15.178a.541.541,0,0,0,.522.745l1.782-.068,1.226,1.295a.541.541,0,0,0,.894-.168l1.761-4.317a2.428,2.428,0,0,1-2.94-.4Zm9.664,2.912-1.535-3.763a2.435,2.435,0,0,1-.86.451c-.713.191-.556.108-.85.4a2.428,2.428,0,0,1-2.941.4l1.761,4.317a.541.541,0,0,0,.894.168l1.226-1.295,1.782.068a.541.541,0,0,0,.522-.745ZM8.9,11.5c.517-.526.576-.481,1.312-.681a1.375,1.375,0,0,0,.963-.98,2.174,2.174,0,0,1,.878-1.548A1.4,1.4,0,0,0,12.4,6.953a2.2,2.2,0,0,1,0-1.787,1.4,1.4,0,0,0-.352-1.339,2.175,2.175,0,0,1-.878-1.548,1.375,1.375,0,0,0-.963-.98A2.121,2.121,0,0,1,8.688.406,1.346,1.346,0,0,0,7.373.047a2.093,2.093,0,0,1-1.756,0A1.345,1.345,0,0,0,4.3.406a2.119,2.119,0,0,1-1.52.893,1.375,1.375,0,0,0-.963.98A2.173,2.173,0,0,1,.94,3.827,1.4,1.4,0,0,0,.588,5.166a2.2,2.2,0,0,1,0,1.787A1.4,1.4,0,0,0,.94,8.292,2.174,2.174,0,0,1,1.818,9.84a1.375,1.375,0,0,0,.963.98c.757.206.814.174,1.312.681a1.344,1.344,0,0,0,1.683.2,1.342,1.342,0,0,1,1.439,0A1.344,1.344,0,0,0,8.9,11.5ZM3.3,5.952A3.192,3.192,0,1,1,6.495,9.2,3.22,3.22,0,0,1,3.3,5.952Z" transform="translate(367 517.153)" fill="#fff"/>
+  </g>
+</svg>

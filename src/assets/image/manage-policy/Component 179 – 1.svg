@@ -1,0 +1,8 @@
+<svg id="Component_179_1" data-name="Component 179 – 1" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
+  <rect id="Rectangle_11360" data-name="Rectangle 11360" width="35" height="35" rx="17.5" fill="#ff7433"/>
+  <g id="Icon_feather-save" data-name="Icon feather-save" transform="translate(10.162 10.161)">
+    <path id="Path_17492" data-name="Path 17492" d="M17.947,19.628H6.181A1.681,1.681,0,0,1,4.5,17.947V6.181A1.681,1.681,0,0,1,6.181,4.5h9.245l4.2,4.2v9.245A1.681,1.681,0,0,1,17.947,19.628Z" transform="translate(-4.5 -4.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Path_17493" data-name="Path 17493" d="M18.9,26.223V19.5H10.5v6.723" transform="translate(-7.138 -11.096)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Path_17494" data-name="Path 17494" d="M10.5,4.5V8.7h6.723" transform="translate(-7.138 -4.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

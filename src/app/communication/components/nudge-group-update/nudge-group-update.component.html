@@ -1,0 +1,27 @@
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content p-4">
+    <div class="modal-header border-bottom pb-3 d-flex justify-content-between align-items-center">
+      <h5 class="modal-title">Edit Nudge Group</h5>
+      <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
+    </div>
+
+    <form [formGroup]="nudgeGroupForm" (ngSubmit)="updateNudgeGroup()" class="d-flex flex-column">
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label">Group Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="messageGroupName" placeholder="Enter Group Name" />
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" formControlName="messageGroupDesc" rows="3" placeholder="Enter Description"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center pt-3">
+        <button class="btn btn-primary" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

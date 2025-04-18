@@ -1,0 +1,16 @@
+.card {
+  margin-bottom: 6px;
+}
+.bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #007bff; /* Blue color */
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+strong {
+  margin-right: 0.5rem;
+}

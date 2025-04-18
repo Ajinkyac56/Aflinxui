@@ -1,0 +1,253 @@
+$flaticon_mycollection-font: "flaticon_mycollection";
+
+@font-face {
+    font-family: $flaticon_mycollection-font;
+    src: url("./flaticon_mycollection.ttf?4fc3915e6b06f8a26c35158edbe261d8") format("truetype"),
+url("./flaticon_mycollection.woff?4fc3915e6b06f8a26c35158edbe261d8") format("woff"),
+url("./flaticon_mycollection.woff2?4fc3915e6b06f8a26c35158edbe261d8") format("woff2"),
+url("./flaticon_mycollection.eot?4fc3915e6b06f8a26c35158edbe261d8#iefix") format("embedded-opentype"),
+url("./flaticon_mycollection.svg?4fc3915e6b06f8a26c35158edbe261d8#flaticon_mycollection") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon_mycollection !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon_mycollection-map: (
+    "insurer": "\f101",
+    "manage-insurer": "\f102",
+    "create-insurer": "\f103",
+    "manage-asego-partner-partner-onboarding": "\f104",
+    "org-structure": "\f105",
+    "create-new-area": "\f106",
+    "create-new-branch": "\f107",
+    "plan": "\f108",
+    "manage-plan": "\f109",
+    "manage-coverage": "\f10a",
+    "create-cost-plan": "\f10b",
+    "create-selling-plan": "\f10c",
+    "request-plan": "\f10d",
+    "manage-permission": "\f10e",
+    "smartboard": "\f10f",
+    "assistance-insurance": "\f110",
+    "manage-policy": "\f111",
+    "search-policy": "\f112",
+    "extend-policy": "\f113",
+    "cancel-policy": "\f114",
+    "authorisation": "\f115",
+    "rewards-recognition": "\f116",
+    "asego-social": "\f117",
+    "help-us-know-you-better": "\f118",
+    "help": "\f119",
+    "claims": "\f11a",
+    "claims-assistance": "\f11b",
+    "track-claim-status": "\f11c",
+    "claim-assessment": "\f11d",
+    "manage-claim": "\f11e",
+    "claim-report": "\f11f",
+    "upload-documents": "\f120",
+    "search-mail": "\f121",
+    "claim-log": "\f122",
+    "accounts": "\f123",
+    "rupees": "\f124",
+    "invoice": "\f125",
+    "manage-invoice": "\f126",
+    "add-receipts": "\f127",
+    "adjust-receipts": "\f128",
+    "payment": "\f129",
+    "create-payment": "\f12a",
+    "payment-request": "\f12b",
+    "view-voucher": "\f12c",
+    "ledger": "\f12d",
+    "allot-target": "\f12e",
+    "calculate-incentive": "\f12f",
+    "create-incentives": "\f130",
+    "deficiency": "\f131",
+    "under-review": "\f132",
+    "approved": "\f133",
+    "paid": "\f134",
+    "calculator": "\f135",
+    "registered": "\f136",
+    "fill-the-claim-form": "\f137",
+    "manage-org-structure": "\f138",
+    "create-policy": "\f139",
+);
+
+.flaticon-insurer:before {
+    content: map-get($flaticon_mycollection-map, "insurer");
+}
+.flaticon-manage-insurer:before {
+    content: map-get($flaticon_mycollection-map, "manage-insurer");
+}
+.flaticon-create-insurer:before {
+    content: map-get($flaticon_mycollection-map, "create-insurer");
+}
+.flaticon-manage-asego-partner-partner-onboarding:before {
+    content: map-get($flaticon_mycollection-map, "manage-asego-partner-partner-onboarding");
+}
+.flaticon-org-structure:before {
+    content: map-get($flaticon_mycollection-map, "org-structure");
+}
+.flaticon-create-new-area:before {
+    content: map-get($flaticon_mycollection-map, "create-new-area");
+}
+.flaticon-create-new-branch:before {
+    content: map-get($flaticon_mycollection-map, "create-new-branch");
+}
+.flaticon-plan:before {
+    content: map-get($flaticon_mycollection-map, "plan");
+}
+.flaticon-manage-plan:before {
+    content: map-get($flaticon_mycollection-map, "manage-plan");
+}
+.flaticon-manage-coverage:before {
+    content: map-get($flaticon_mycollection-map, "manage-coverage");
+}
+.flaticon-create-cost-plan:before {
+    content: map-get($flaticon_mycollection-map, "create-cost-plan");
+}
+.flaticon-create-selling-plan:before {
+    content: map-get($flaticon_mycollection-map, "create-selling-plan");
+}
+.flaticon-request-plan:before {
+    content: map-get($flaticon_mycollection-map, "request-plan");
+}
+.flaticon-manage-permission:before {
+    content: map-get($flaticon_mycollection-map, "manage-permission");
+}
+.flaticon-smartboard:before {
+    content: map-get($flaticon_mycollection-map, "smartboard");
+}
+.flaticon-assistance-insurance:before {
+    content: map-get($flaticon_mycollection-map, "assistance-insurance");
+}
+.flaticon-manage-policy:before {
+    content: map-get($flaticon_mycollection-map, "manage-policy");
+}
+.flaticon-search-policy:before {
+    content: map-get($flaticon_mycollection-map, "search-policy");
+}
+.flaticon-extend-policy:before {
+    content: map-get($flaticon_mycollection-map, "extend-policy");
+}
+.flaticon-cancel-policy:before {
+    content: map-get($flaticon_mycollection-map, "cancel-policy");
+}
+.flaticon-authorisation:before {
+    content: map-get($flaticon_mycollection-map, "authorisation");
+}
+.flaticon-rewards-recognition:before {
+    content: map-get($flaticon_mycollection-map, "rewards-recognition");
+}
+.flaticon-asego-social:before {
+    content: map-get($flaticon_mycollection-map, "asego-social");
+}
+.flaticon-help-us-know-you-better:before {
+    content: map-get($flaticon_mycollection-map, "help-us-know-you-better");
+}
+.flaticon-help:before {
+    content: map-get($flaticon_mycollection-map, "help");
+}
+.flaticon-claims:before {
+    content: map-get($flaticon_mycollection-map, "claims");
+}
+.flaticon-claims-assistance:before {
+    content: map-get($flaticon_mycollection-map, "claims-assistance");
+}
+.flaticon-track-claim-status:before {
+    content: map-get($flaticon_mycollection-map, "track-claim-status");
+}
+.flaticon-claim-assessment:before {
+    content: map-get($flaticon_mycollection-map, "claim-assessment");
+}
+.flaticon-manage-claim:before {
+    content: map-get($flaticon_mycollection-map, "manage-claim");
+}
+.flaticon-claim-report:before {
+    content: map-get($flaticon_mycollection-map, "claim-report");
+}
+.flaticon-upload-documents:before {
+    content: map-get($flaticon_mycollection-map, "upload-documents");
+}
+.flaticon-search-mail:before {
+    content: map-get($flaticon_mycollection-map, "search-mail");
+}
+.flaticon-claim-log:before {
+    content: map-get($flaticon_mycollection-map, "claim-log");
+}
+.flaticon-accounts:before {
+    content: map-get($flaticon_mycollection-map, "accounts");
+}
+.flaticon-rupees:before {
+    content: map-get($flaticon_mycollection-map, "rupees");
+}
+.flaticon-invoice:before {
+    content: map-get($flaticon_mycollection-map, "invoice");
+}
+.flaticon-manage-invoice:before {
+    content: map-get($flaticon_mycollection-map, "manage-invoice");
+}
+.flaticon-add-receipts:before {
+    content: map-get($flaticon_mycollection-map, "add-receipts");
+}
+.flaticon-adjust-receipts:before {
+    content: map-get($flaticon_mycollection-map, "adjust-receipts");
+}
+.flaticon-payment:before {
+    content: map-get($flaticon_mycollection-map, "payment");
+}
+.flaticon-create-payment:before {
+    content: map-get($flaticon_mycollection-map, "create-payment");
+}
+.flaticon-payment-request:before {
+    content: map-get($flaticon_mycollection-map, "payment-request");
+}
+.flaticon-view-voucher:before {
+    content: map-get($flaticon_mycollection-map, "view-voucher");
+}
+.flaticon-ledger:before {
+    content: map-get($flaticon_mycollection-map, "ledger");
+}
+.flaticon-allot-target:before {
+    content: map-get($flaticon_mycollection-map, "allot-target");
+}
+.flaticon-calculate-incentive:before {
+    content: map-get($flaticon_mycollection-map, "calculate-incentive");
+}
+.flaticon-create-incentives:before {
+    content: map-get($flaticon_mycollection-map, "create-incentives");
+}
+.flaticon-deficiency:before {
+    content: map-get($flaticon_mycollection-map, "deficiency");
+}
+.flaticon-under-review:before {
+    content: map-get($flaticon_mycollection-map, "under-review");
+}
+.flaticon-approved:before {
+    content: map-get($flaticon_mycollection-map, "approved");
+}
+.flaticon-paid:before {
+    content: map-get($flaticon_mycollection-map, "paid");
+}
+.flaticon-calculator:before {
+    content: map-get($flaticon_mycollection-map, "calculator");
+}
+.flaticon-registered:before {
+    content: map-get($flaticon_mycollection-map, "registered");
+}
+.flaticon-fill-the-claim-form:before {
+    content: map-get($flaticon_mycollection-map, "fill-the-claim-form");
+}
+.flaticon-manage-org-structure:before {
+    content: map-get($flaticon_mycollection-map, "manage-org-structure");
+}
+.flaticon-create-policy:before {
+    content: map-get($flaticon_mycollection-map, "create-policy");
+}

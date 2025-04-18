@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <!-- Header Section -->
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading">{{ dataFile.fileName }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="mb-5">
+    <form [formGroup]="alphaRosterViewForm">
+      <div class="mt-4" id="Manage-Airman-div1">
+        <div class="row g-3">
+          <!-- File Name Input -->
+          <div class="col-md-6 col-lg-3 mt-3">
+            <label for="Branch" class="form-label">Airman Name</label>
+            <input type="text" class="form-control input" name="userName" placeholder="Enter User Name" formControlName="userName" />
+          </div>
+          <div class="col-md-6 col-lg-3 mt-3">
+            <label for="Branch" class="form-label">Email</label>
+            <input type="text" class="form-control input" name="emailId" placeholder="Enter User Email Id" formControlName="emailId" />
+          </div>
+          <div class="col-md-6 col-lg-3 mt-3">
+            <div class="mb-3">
+              <label for="Branch" class="form-label">Status</label>
+              <select class="form-select form-control custome-select" formControlName="status">
+                <option value="Select Status" selected disabled>Select Status</option>
+                <option value="Failed">Failed</option>
+                <option value="Success">Success</option>
+              </select>
+            </div>
+          </div>
+          <!-- Search Button -->
+          <div class="col-md-1 col-lg-1 mt-5">
+            <button class="btn btn-rounded btn-primary w-100 search-btn" matTooltip="Search" (click)="searchViewAlphaRoster(true)">
+              <i class="ti ti-search" style="font-size: 21px"></i>
+            </button>
+          </div>
+
+          <!-- Reset Button -->
+          <div class="col-md-1 col-lg-1 mt-5">
+            <button class="btn btn-primary w-100 reset-btn" type="button" matTooltip="Refresh" (click)="resetFilters()">
+              <i class="fs-7 ti ti-refresh"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Table Section -->
+        <div style="overflow-x: auto" class="card mt-5 mb-5">
+          <table class="table table-striped">
+            <thead class="table-head">
+              <tr>
+                <th scope="col" class="table-heading">Airman Name</th>
+                <th scope="col" class="table-heading">Email</th>
+                <th scope="col" class="table-heading">Status</th>
+                <th scope="col" class="table-heading">Reason</th>
+              </tr>
+            </thead>
+            <tbody class="insurer-table">
+              <ng-container *ngFor="let data of userData; let pIndex = index">
+                <tr>
+                  <td>{{ data.name }}</td>
+                  <td>{{ data.email }}</td>
+                  <td>{{ data.importStatus }}</td>
+                  <td>{{ data.failedReason }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+          <div class="col-sm-6 align-self-center" style="width: 200px">
+            <a class="btn d-flex fw-bolder" *ngIf="!noMoreRecords" id="loadMore" (click)="loadMoreRecord()">Load More...</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+</div>

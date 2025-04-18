@@ -1,0 +1,84 @@
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content requirement-dialog p-4">
+    <div class="modal-header border-bottom pb-3">
+      <h2 mat-dialog-title class="modal-title">{{ data.member?.id ? 'Edit Squadron/Groups' : 'Add Squadron/Groups' }}</h2>
+      <button type="button" class="btn-close" (click)="closeDialog()"></button>
+    </div>
+
+    <form [formGroup]="squadronForm" (ngSubmit)="onSave()">
+      <div class="modal-body">
+        <div class="row g-3">
+          <!-- Squadron Name -->
+          <div class="col-12">
+            <label for="squadronName" class="form-label">Squadron Name <span class="text-danger">*</span></label>
+            <input class="form-control" type="text" id="squadronName" formControlName="squadronName" placeholder="Enter Squadron Name" />
+            <mat-error *ngIf="squadronForm.get('squadronName')?.invalid && squadronForm.get('squadronName')?.touched">
+              Squadron Name is required.
+            </mat-error>
+          </div>
+
+          <!-- Admin Selection -->
+          <div class="col-12">
+            <label for="adminUserId" class="form-label">Admin<span style="color: red">*</span></label>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-select formControlName="adminUserId" placeholder="Select Admin">
+                <ngx-mat-select-search
+                  [formControl]="adminSearchControl"
+                  placeholderLabel="Search Admin"
+                  noEntriesFoundLabel="Data not found"></ngx-mat-select-search>
+                <mat-option *ngFor="let admin of adminList" [value]="admin.id">
+                  {{ admin.fullName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Sub-Admin Selection -->
+          <div class="col-12">
+            <label for="subAdminId" class="form-label">Sub-Admin <span style="color: red">*</span></label>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-select formControlName="subAdminId" placeholder="Select Sub-Admin">
+                <ngx-mat-select-search [formControl]="subAdminSearchControl" placeholderLabel="Search Sub-Admin"></ngx-mat-select-search>
+                <mat-option *ngFor="let subAdmin of subAdminList" [value]="subAdmin.id">
+                  {{ subAdmin.fullName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Department Selection -->
+          <div class="col-12">
+            <label for="department" class="form-label">Department <span class="text-danger">*</span></label>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-select formControlName="department" placeholder="Select Departments" multiple>
+                <ngx-mat-select-search [formControl]="departmentSearchControl" placeholderLabel="Search Department"></ngx-mat-select-search>
+                <mat-option *ngFor="let dept of departmentList" [value]="dept.id">
+                  {{ dept.departmentName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Logo Upload -->
+          <div class="col-12">
+            <label for="workFile" class="form-label fw-bold">File Upload:</label>
+            <div id="yourFile" (click)="uploadFileClick('upFile-ho')" class="upload-file form-control text-center p-2">
+              <span *ngIf="!logo && !squadronForm.get('squadronLogo')?.value">Upload File</span>
+              <span *ngIf="logo">{{ logo.name }}</span>
+              <span *ngIf="!logo && squadronForm.get('squadronLogo')?.value">
+                {{ squadronForm.get('squadronLogo')?.value }}
+              </span>
+              <img src="assets/image/onboarding/Upload.svg" alt="Upload Icon" class="upload-icon" />
+            </div>
+            <input id="upFile-ho" type="file" formControlName="squadronLogo" class="form-control d-none" (change)="fileUpload($event)" />
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer d-flex justify-content-center pt-3">
+          <button class="btn btn-primary px-4 fw-bold" type="submit">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

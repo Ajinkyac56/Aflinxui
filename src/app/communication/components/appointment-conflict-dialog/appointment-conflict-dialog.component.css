@@ -1,0 +1,44 @@
+.move-right {
+  position: absolute;
+  top: 10px;
+  /* Adjust top position */
+  right: 10px;
+  /* Move to the right side */
+}
+:host::ng-deep .mdc-notched-outline {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: 75% !important;
+  text-align: left;
+  pointer-events: none;
+}
+
+:host::ng-deep .mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding: 10px !important;
+}
+.dialog-container {
+  max-width: 600px; /* Adjust width */
+  max-height: 100vh; /* Reduce height */
+}
+
+.modal-header {
+  padding: 10px 20px; /* Reduce padding */
+}
+
+.modal-footer {
+  padding: 10px; /* Reduce padding */
+}
+
+input,
+textarea,
+select {
+  font-size: 14px; /* Reduce font size for compact UI */
+  padding: 8px;
+}

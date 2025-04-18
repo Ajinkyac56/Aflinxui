@@ -1,0 +1,35 @@
+<div class="modal-dialog modal-dialog-centered modal-xl" style="min-width: 508px">
+  <!-- Increased width -->
+  <div class="modal-content requirement-dialog p-4">
+    <!-- Modal Header -->
+    <div class="modal-header mb-3 d-flex">
+      <h5 class="modal-title fw-bold">Appointment Details</h5>
+      <button type="button" class="btn-close bg-light ms-auto" (click)="closeDialog()" aria-label="Close"></button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body px-3">
+      <div class="d-flex flex-column">
+        <li class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot me-3"></span>
+          <strong>Appointment Title :</strong> <span class="text-muted ms-1">{{ data.messageTitle }}</span>
+        </li>
+
+        <li class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot bg-primary me-3"></span>
+          <strong>Message Text :</strong> <span class="text-muted ms-1">{{ data.messageText }}</span>
+        </li>
+
+        <li class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot bg-primary me-3"></span>
+          <strong>Message Type :</strong> <span class="text-muted ms-1">{{ data.messageType }}</span>
+        </li>
+
+        <li class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot bg-primary me-3"></span>
+          <strong>User Count :</strong> <span class="text-muted ms-1">{{ data.userCount }}</span>
+        </li>
+      </div>
+    </div>
+  </div>
+</div>

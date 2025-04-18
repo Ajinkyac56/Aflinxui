@@ -1,0 +1,128 @@
+<div class="container-fluid">
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading"><i class="fa-solid fa-star me-2"></i>Requirements</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a class="text-dark">>&nbsp;Requirement</a>
+            </li>
+            <ng-template #editCase>
+              <li class="breadcrumb-item text-dark" aria-current="page">&nbsp; Edit Airman</li>
+              <ng-template #viewCaseHeader>
+                <li class="breadcrumb-item text-dark" aria-current="page">&nbsp; View Airman</li>
+              </ng-template>
+            </ng-template>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <section class="mb-5">
+    <form [formGroup]="requirementsForm">
+      <div class="mt-4" id="Manage-Airman-div1">
+        <div class="row g-3 align-items-center">
+          <!-- File Name Input -->
+          <div class="col-md-6 col-lg-3">
+            <input type="text" class="form-control" name="airman-name" placeholder="Enter File Name" formControlName="fileName" />
+          </div>
+
+          <!-- Start Date Picker -->
+          <div class="col-md-6 col-lg-3 mt-5">
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput [matDatepicker]="startDate" placeholder="Start Date" formControlName="startDate" />
+              <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+              <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- End Date Picker -->
+          <div class="col-md-6 col-lg-3 mt-5">
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput [matDatepicker]="endDate" placeholder="End Date" formControlName="endDate" />
+              <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+              <mat-datepicker #endDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- Search Button -->
+          <div class="col-md-2 col-lg-1 d-flex justify-content-center">
+            <button class="btn btn-primary w-100 search-btn" matTooltip="Search" (click)="searchAlphaRoster(true)">
+              <i class="ti ti-search" style="font-size: 21px"></i>
+            </button>
+          </div>
+
+          <!-- Reset Button -->
+          <div class="col-md-2 col-lg-1 d-flex justify-content-center">
+            <button class="btn btn-primary w-100 reset-btn" type="button" matTooltip="Refresh" (click)="resetFilters()">
+              <i class="fs-7 ti ti-refresh"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Table Section -->
+        <div style="overflow-x: auto" class="card mt-5 mb-5">
+          <table class="table table-striped">
+            <thead class="table-head">
+              <tr>
+                <th scope="col" class="table-heading">
+                  <input
+                    class="form-check-input success checkAll"
+                    type="checkbox"
+                    value=""
+                    id="mycheckbox1"
+                    name="checkAll"
+                    (change)="checkBoxValueClicked($event, 'all', null)" />
+                </th>
+                <th scope="col" class="table-heading">File Name</th>
+                <th scope="col" class="table-heading">Date</th>
+                <th scope="col" class="table-heading">Success Records</th>
+                <th scope="col" class="table-heading">Failed Records</th>
+                <th scope="col" class="table-heading">Total Records</th>
+                <th scope="col" class="table-heading">Action</th>
+              </tr>
+            </thead>
+            <tbody class="insurer-table">
+              <ng-container *ngFor="let data of datafilerecords; let pIndex = index">
+                <tr>
+                  <td>
+                    <input
+                      class="form-check-input success"
+                      type="checkbox"
+                      value=""
+                      id="mycheckbox"
+                      (change)="checkBoxValueClicked($event, 'item', data)" />
+                  </td>
+                  <td>{{ data.fileName }}</td>
+                  <td>{{ data.createdAt | date : 'yyyy-MM-dd' }}</td>
+                  <td>{{ data.successRecords }}</td>
+                  <td>{{ data.failedRecords }}</td>
+                  <td>{{ data.totalRecords }}</td>
+                  <td>
+                    <ul class="list-unstyled">
+                      <li>
+                        <a class="dropdown-item d-flex align-items-center gap-3" (click)="onViewClick(data)">
+                          <i class="fa-solid fa-eye"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+          <div class="col-sm-6 align-self-center" style="width: 200px">
+            <a class="btn d-flex fw-bolder" *ngIf="!noMoreRecords" id="loadMore" (click)="loadMoreRecord()">Load More...</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+</div>

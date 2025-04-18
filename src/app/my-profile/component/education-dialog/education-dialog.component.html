@@ -1,0 +1,82 @@
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content requirement-dialog p-4">
+    <!-- Modal Header -->
+    <div class="modal-header border-bottom pb-3">
+      <h2 mat-dialog-title>{{ data?.educationId ? 'Edit Education' : 'Add Education' }}</h2>
+      <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
+    </div>
+
+    <form [formGroup]="educationForm">
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="row g-4 mb-3">
+          <!-- Category -->
+          <div class="col-md-6">
+            <label class="form-label">Category <span class="text-danger">*</span></label>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select placeholder="Select Category" formControlName="categoryId">
+                <ngx-mat-select-search [formControl]="categorySearchControl" placeholderLabel="Search Category" noEntriesFoundLabel="Data not found">
+                </ngx-mat-select-search>
+                <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
+                  {{ category.categoryName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Degree/Certificate <span class="text-danger">*</span></label>
+            <input class="form-control" formControlName="certificateEarned" placeholder="Enter Degree Name" />
+          </div>
+        </div>
+
+        <div class="row g-4 mb-3">
+          <!-- School Name -->
+          <div class="col-md-6">
+            <label class="form-label">School Name <span class="text-danger">*</span></label>
+            <input class="form-control" formControlName="nameOfTheAccreditedSchool" placeholder="Enter School Name" />
+          </div>
+
+          <!-- Major/Field of Study -->
+          <div class="col-md-6">
+            <label class="form-label">Major/Field of Study <span class="text-danger">*</span></label>
+            <input class="form-control" formControlName="fieldOfStudy" placeholder="Enter Field Name" />
+          </div>
+        </div>
+
+        <div class="row g-4 mb-3">
+          <!-- Graduation Year -->
+          <div class="col-md-6">
+            <label class="form-label">Graduation Year <span class="text-danger">*</span></label>
+            <input class="form-control" formControlName="graduationYear" placeholder="Graduation Year" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" formControlName="educationDescription" placeholder="Enter Description"></textarea>
+          </div>
+        </div>
+
+        <div class="row g-4 mb-3">
+          <!-- File Upload -->
+          <div class="col-md-6">
+            <label class="form-label">File Upload:</label>
+            <div
+              id="yourFile"
+              (click)="uploadFileClick('upFile-edu')"
+              class="upload-file form-control d-flex align-items-center justify-content-between px-3">
+              <span *ngIf="!userEducation && !educationForm.get('fileName')?.value">Upload File</span>
+              <span *ngIf="userEducation">{{ userEducation.name }}</span>
+              <span *ngIf="!userEducation && educationForm.get('fileName')?.value">{{ educationForm.get('fileName')?.value }}</span>
+              <img src="assets/image/onboarding/Upload.svg" alt="Upload Icon" style="width: 20px; height: 20px" />
+            </div>
+            <input id="upFile-edu" formControlName="fileName" type="file" class="form-control d-none" (change)="fileUpload($event)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer d-flex justify-content-center pt-3">
+        <button class="btn btn-primary px-4 fw-bold" type="submit" (click)="submitEducationForm()">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

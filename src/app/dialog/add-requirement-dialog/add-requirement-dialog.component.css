@@ -1,0 +1,23 @@
+.mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  /* padding-top: var(--mat-form-field-container-vertical-padding); */
+  /* padding-bottom: var(--mat-form-field-container-vertical-padding); */
+  padding-top: 8px;
+}
+
+.mat-mdc-form-field-infix {
+  flex: auto;
+  min-width: 0;
+  width: 273px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.mat-mdc-text-field-wrapper {
+  width: 100%;
+  z-index: 0;
+  height: 37px;
+}
+.mat-dialog-actions {
+  justify-content: flex-end;
+}

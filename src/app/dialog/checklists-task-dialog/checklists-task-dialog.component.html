@@ -1,0 +1,56 @@
+<div class="modal-dialog modal-dialog-centered w-100 h-100 m-0">
+  <div class="modal-content d-flex flex-column h-100 p-4">
+    <div class="modal-header border-bottom pb-4">
+      <h5 class="modal-title">{{ data?.taskId ? 'Edit Task' : 'Add Task' }}</h5>
+      <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
+    </div>
+
+    <form [formGroup]="taskForm" (ngSubmit)="onSave()" class="d-flex flex-column flex-grow-1">
+      <div class="modal-body">
+        <div class="row g-4">
+          <!-- Task Name -->
+          <div class="col-12">
+            <label for="taskName" class="form-label">Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="taskName" formControlName="taskName" placeholder="Enter Task Name" />
+            <mat-error *ngIf="taskForm.get('taskName')?.invalid && taskForm.get('taskName')?.touched">
+              Task name is required and must be at least 2 characters long.
+            </mat-error>
+          </div>
+
+          <!-- Type Checkboxes -->
+          <div class="col-12">
+            <label class="form-label">Type</label>
+            <div class="d-flex flex-wrap gap-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="showYes" formControlName="showYes" />
+                <label class="form-check-label" for="showYes">Show Yes/No</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="showNotes" formControlName="showNotes" />
+                <label class="form-check-label" for="showNotes">Show Notes</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="showUpload" formControlName="showUpload" />
+                <label class="form-check-label" for="showUpload">Show Upload</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="showQr" formControlName="showQr" />
+                <label class="form-check-label" for="showQr">Show QR</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Task Note -->
+          <div class="col-12">
+            <label for="taskNote" class="form-label">Notes</label>
+            <textarea class="form-control" id="taskNote" formControlName="taskNote" placeholder="Write Notes" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer justify-content-center mt-4">
+        <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

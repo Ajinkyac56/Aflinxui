@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="237" height="60" viewBox="0 0 237 60">
+  <defs>
+    <filter id="Rectangle_12086" x="0" y="0" width="237" height="60" filterUnits="userSpaceOnUse">
+      <feOffset dx="-2" dy="-2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-opacity="0.251"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_31159" data-name="Group 31159" transform="translate(-335 -303)">
+    <g transform="matrix(1, 0, 0, 1, 335, 303)" filter="url(#Rectangle_12086)">
+      <rect id="Rectangle_12086-2" data-name="Rectangle 12086" width="207" height="30" rx="15" transform="translate(17 17)" fill="#43b0ef"/>
+    </g>
+    <text id="AFLINX_RECOMMENDS_" data-name="AFLINX RECOMMENDS " transform="translate(389 341)" fill="#fff" font-size="14" font-family="Mulish-Bold, Mulish" font-weight="700"><tspan x="0" y="0">AFLINX RECOMMENDS </tspan></text>
+    <path id="Icon_awesome-crown" data-name="Icon awesome-crown" d="M14.238,12.081H3.02a.433.433,0,0,0-.431.431v.863a.433.433,0,0,0,.431.431H14.238a.433.433,0,0,0,.431-.431v-.863A.433.433,0,0,0,14.238,12.081Zm1.726-8.629A1.3,1.3,0,0,0,14.67,4.746a1.268,1.268,0,0,0,.119.534L12.836,6.45a.862.862,0,0,1-1.192-.313l-2.2-3.845a1.294,1.294,0,1,0-1.634,0l-2.2,3.845a.862.862,0,0,1-1.192.313L2.473,5.28a1.294,1.294,0,1,0-1.178.76A1.322,1.322,0,0,0,1.5,6.019l1.95,5.2H13.807l1.95-5.2a1.322,1.322,0,0,0,.208.022,1.294,1.294,0,1,0,0-2.589Z" transform="translate(367 328)" fill="#fff"/>
+  </g>
+</svg>

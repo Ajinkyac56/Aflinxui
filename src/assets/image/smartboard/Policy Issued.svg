@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="49.474" height="40" viewBox="0 0 49.474 40">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_133" data-name="Rectangle 133" width="49.474" height="40" fill="#ff5100"/>
+    </clipPath>
+  </defs>
+  <g id="Policy_Issued" data-name="Policy Issued" clip-path="url(#clip-path)">
+    <path id="Path_203" data-name="Path 203" d="M31.029,31.908V36.4l-8.246-4.493H1.953V2.47h27.78V9.88h7.382V31.908H31.029ZM32.119,3.6l4.339,4.046H32.119ZM31.471,0H0V34.379H22.136L32.982,40V34.379h6.076V7.644L31.461,0Z" fill="#ff5100" fill-rule="evenodd"/>
+    <path id="Path_204" data-name="Path 204" d="M45.109,35.932,43.2,37.124l-1.532-1.192,1.151-3.588h1.151l1.152,3.588ZM41.284,4.417A1.844,1.844,0,0,1,43.2,2.426a2.166,2.166,0,0,1,2.293,1.991V29.948H41.284Zm6.117,0A4,4,0,0,0,43.2.425a3.7,3.7,0,0,0-3.825,3.993V32.344h1.151L39.372,36.73,43.2,39.52,47.4,36.73,45.87,32.344H47.4Z" transform="translate(2.072 0.022)" fill="#ff5100" fill-rule="evenodd"/>
+    <path id="Path_205" data-name="Path 205" d="M31.9,21.352H7.139a1.129,1.129,0,1,0,0,2.257H31.9c.391,0,.771-.745.771-1.129S32.277,21.352,31.9,21.352Z" transform="translate(0.315 1.124)" fill="#ff5100" fill-rule="evenodd"/>
+    <path id="Path_206" data-name="Path 206" d="M31.9,15.162H7.139a1.237,1.237,0,0,0,0,2.47H31.9c.391,0,.771-.82.771-1.235S32.277,15.162,31.9,15.162Z" transform="translate(0.315 0.798)" fill="#ff5100" fill-rule="evenodd"/>
+    <path id="Path_207" data-name="Path 207" d="M7.129,11.431h13.1A1.2,1.2,0,0,0,21.379,10.3a1.2,1.2,0,0,0-1.151-1.129H7.129A1.2,1.2,0,0,0,5.978,10.3,1.2,1.2,0,0,0,7.129,11.431Z" transform="translate(0.315 0.483)" fill="#ff5100" fill-rule="evenodd"/>
+  </g>
+</svg>

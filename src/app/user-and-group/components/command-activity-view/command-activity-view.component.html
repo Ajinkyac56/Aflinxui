@@ -1,0 +1,105 @@
+<div class="container-fluid">
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading">Sub Admin List</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt-4">
+    <!-- Search Bar and Add Button -->
+    <form [formGroup]="commandActivityForm">
+      <div class="d-flex align-items-center">
+        <div class="row g-3 align-items-center flex-grow-1">
+          <div class="col-md-6 col-lg-3">
+            <input type="text" class="form-control input" formControlName="name" placeholder="Enter Airman Name" />
+          </div>
+          <div class="col-md-1 col-lg-1">
+            <button class="btn btn-primary" (click)="searchDeptSubAdmin(true)">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+          <div class="col-md-1 col-lg-1">
+            <button class="btn btn-primary w-100 reset-btn" type="button" matTooltip="Refresh" (click)="resetFilter()">
+              <i class="fs-7 ti ti-refresh"></i>
+            </button>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <button class="btn btn-primary ms-auto" type="button" (click)="onViewClick()">Add subAdmin</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- sub admin Table -->
+    <div style="overflow-x: auto" class="card mt-5 mb-5">
+      <table class="table table-striped pb-4">
+        <thead class="table-head">
+          <tr>
+            <th>
+              <input
+                class="form-check-input success"
+                type="checkbox"
+                value=""
+                id="mycheckbox1"
+                (change)="checkBoxValueClicked($event, 'all', null)" />
+            </th>
+            <th scope="col" class="table-heading">Profile Picture</th>
+            <th scope="col" class="table-heading">First Name</th>
+            <th scope="col" class="table-heading">Last Name</th>
+            <th scope="col" class="table-heading">Email</th>
+            <th scope="col" class="table-heading">Role</th>
+            <th scope="col" class="table-heading" style="color: #5a6a85; width: 100px">
+              <div class="dropdown dropstart">
+                <a href="#" class="fw-bolder" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="color: #5a6a85">
+                  Action <i class="fa fa-caret-down fs-2 ml-2" style="color: #0f456b"></i>
+                </a>
+              </div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of deptSubAdminList">
+            <td>
+              <input
+                class="form-check-input success"
+                type="checkbox"
+                value=""
+                id="mycheckbox1"
+                (change)="checkBoxValueClicked($event, 'item', item)"
+                [checked]="isUserSelected(item)" />
+            </td>
+            <td>
+              <img
+                [src]="item.profilePicture ? item.profilePicture : 'assets/images/profile/user-1.jpg'"
+                alt="Profile Picture"
+                class="rounded-circle border"
+                style="width: 30px; height: 30px" />
+            </td>
+            <td>{{ item.firstName }}</td>
+            <td>{{ item.lastName }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.role }}</td>
+            <td>
+              <div class="dropdown dropstart">
+                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="ti ti-dots fs-5" style="color: #0f456b"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li *ngIf="hasAccessToDelete">
+                    <a class="dropdown-item d-flex align-items-center gap-3" (click)="deleteUserGroup(item.subAdminId, item.departmentId)">
+                      <i class="fas fa-trash" style="color: #ff0000"></i>Delete
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content requirement-dialog p-4">
+    <!-- Modal Header -->
+    <div class="modal-header border-bottom pb-3">
+      <h2 mat-dialog-title>{{ data ? 'Edit Role' : 'Add Role' }}</h2>
+      <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
+    </div>
+
+    <form [formGroup]="roleForm">
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="row g-4 mb-3">
+          <!-- Role Input -->
+          <div class="col-md-6">
+            <label for="roleInput" class="form-label"> Role <span class="text-danger">*</span> </label>
+            <input type="text" class="form-control" id="roleInput" formControlName="name" placeholder="Enter Role" />
+            <mat-error *ngIf="roleForm.get('name')?.invalid && roleForm.get('name')?.touched">
+              Role is required and must have at least 2 characters.
+            </mat-error>
+          </div>
+
+          <!-- Data Access Level -->
+          <div class="col-md-6">
+            <label class="form-label"> Data Access Level <span class="text-danger">*</span> </label>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select formControlName="roleType" placeholder="Select Data Access Level">
+                <ngx-mat-select-search
+                  [formControl]="roleTypeSearchControl"
+                  placeholder="Search Data Access Level"
+                  noEntriesFoundLabel="Data not found">
+                </ngx-mat-select-search>
+                <mat-option *ngFor="let item of roleData" [value]="item.id">
+                  {{ item.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="roleForm.get('roleType')?.invalid && roleForm.get('roleType')?.touched"> Role Type is required. </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="row g-4 mb-3">
+          <div class="col-12">
+            <label for="descriptionInput" class="form-label"> Description <span class="text-danger">*</span> </label>
+            <textarea class="form-control" id="descriptionInput" formControlName="description" rows="3" placeholder="Enter Description"> </textarea>
+            <mat-error *ngIf="roleForm.get('description')?.invalid && roleForm.get('description')?.touched">
+              Description is required and must have at least 5 characters.
+            </mat-error>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer d-flex justify-content-center pt-3">
+        <button type="submit" class="btn btn-primary px-4 fw-bold" [disabled]="roleForm.invalid" (click)="onSave()">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

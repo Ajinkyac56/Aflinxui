@@ -1,0 +1,16 @@
+.dropdown-container {
+  position: absolute;
+  right: 10px;
+  top: 55px;
+  width: 330px;
+  z-index: 1000;
+}
+
+.container-fluid {
+  position: relative;
+}
+
+:host::ng-deep .mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding: 7px !important;
+}

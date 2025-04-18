@@ -1,0 +1,104 @@
+:host::ng-deep .mdc-notched-outline {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: 75% !important;
+  text-align: left;
+  pointer-events: none;
+}
+
+:host::ng-deep .mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding: 10px !important;
+}
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+/* Reset Material notched outline to align with Bootstrap buttons */
+:host ::ng-deep .mdc-notched-outline {
+  height: 36px !important; /* Matches Bootstrap button height */
+  top: 0 !important;
+}
+
+/* Adjust infix padding and height to match Bootstrap buttons */
+:host ::ng-deep .mdc-text-field--outlined .mat-mdc-form-field-infix,
+:host ::ng-deep .mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding: 0 10px !important; /* Remove vertical padding, keep horizontal */
+  min-height: 36px !important; /* Match Bootstrap button height */
+  height: 36px !important; /* Force exact height */
+  display: flex;
+  align-items: center;
+}
+
+/* Ensure the input inside mat-form-field aligns properly */
+:host ::ng-deep .mat-mdc-form-field-infix .mat-mdc-form-field-input-control {
+  height: 100% !important;
+  line-height: 36px !important;
+}
+
+/* Adjust the datepicker toggle to fit within the height */
+:host ::ng-deep .mat-datepicker-toggle {
+  height: 36px !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Custom class to align mat-form-field with Bootstrap elements */
+.align-mat-select.mat-form-field {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.5; /* Matches Bootstrap's button line-height */
+}
+
+/* Remove extra wrapper padding */
+.align-mat-select .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+  margin: 0 !important;
+}
+
+/* Ensure flex container matches Bootstrap height */
+.align-mat-select .mat-form-field-flex {
+  align-items: center;
+  height: 36px !important; /* Matches Bootstrap button height */
+}
+
+/* Center the select trigger or input vertically */
+.align-mat-select .mat-select-trigger,
+.align-mat-select .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Adjust Bootstrap buttons to shift slightly upward */
+.btn-primary {
+  height: 36px;
+  margin-top: -2px; /* Shift upward by 2px */
+  display: flex;
+  align-items: center;
+  padding: 0 12px; /* Adjust padding to fit content */
+}
+
+/* Specific adjustments for Search and Reset buttons */
+.btn-rounded.search-btn,
+.btn-primary.reset-btn {
+  width: 36px; /* Match height for square buttons */
+  height: 36px;
+  margin-top: -2px; /* Shift upward by 2px */
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Adjust the Add button */
+.btn-primary:not(.btn-rounded):not(.reset-btn) {
+  height: 36px;
+  margin-top: -2px; /* Shift upward by 2px */
+  padding: 0 12px;
+}

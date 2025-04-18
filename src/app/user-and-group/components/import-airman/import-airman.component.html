@@ -1,0 +1,111 @@
+<div class="container-fluid">
+  <!-- Header -->
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading"><i class="ti ti-user-plus me-2"></i>Import Airman</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/userAndgroup']" class="text-muted">>&nbsp;Manage Airman</a>
+            </li>
+            <li class="breadcrumb-item text-dark" aria-current="page">> Import Airman</li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Navigation and Download Button Container -->
+  <div class="d-flex justify-content-between align-items-center mt-4 px-2">
+    <nav class="nav nav-tab nav-fill flex-grow-0">
+      <button class="tab-pills mr-5" [class.active]="currentTab === 1" aria-label="Select File">
+        <div class="bullet px-3">
+          <span>1</span>
+        </div>
+        <p class="ml-2">Select File</p>
+      </button>
+      <button class="tab-pills mr-5" [class.active]="currentTab === 2" aria-label="Map Variables">
+        <div class="bullet px-3">
+          <span>2</span>
+        </div>
+        <p class="ml-2">Map Variables</p>
+      </button>
+      <button class="tab-pills mr-5" [class.active]="currentTab === 3" aria-label="Preview">
+        <div class="bullet px-3">
+          <span>3</span>
+        </div>
+        <p class="ml-2">Preview</p>
+      </button>
+    </nav>
+    <button class="btn btn-primary ml-3" (click)="downloadTemplate()"><i class="fs-4 ti ti-download" style="color: #fff"></i> Download Sample</button>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content mt-4">
+    <!-- Tab 1: Select File -->
+    <div *ngIf="currentTab === 1">
+      <div id="upload-section" class="text-center">
+        <div id="uploadArea" class="upload-area border border-dashed rounded p-4 mb-3" (click)="fileInput.click()">
+          <img src="assets/image/claim-module/file.svg" alt="Upload Icon" class="upload-icon mb-3" />
+          <p class="upload-instructions">Choose a file or drag & drop it here</p>
+          <p class="upload-support-text text-muted">Excel formats (.xls, .xlsx, .csv)</p>
+        </div>
+        <input #fileInput id="fileInput" type="file" class="d-none" accept=".xls,.xlsx,.csv" (change)="onFileChange($event)" />
+        <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Map Variables -->
+    <div *ngIf="currentTab === 2">
+      <h3>Map Excel Columns to System Variables</h3>
+      <div *ngFor="let header of headers">
+        <div class="row align-items-center mb-3">
+          <div class="col-md-6">
+            <input type="text" class="form-control" [value]="header" readonly />
+          </div>
+          <div class="col-md-6">
+            <select class="form-select" [(ngModel)]="mapping[header]">
+              <option value="">Select Variable</option>
+              <option *ngFor="let variable of systemVariables" [value]="variable">
+                {{ variable }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="mappingError" class="text-danger">{{ mappingError }}</div>
+    </div>
+
+    <!-- Tab 3: Preview -->
+    <div *ngIf="currentTab === 3">
+      <h3>Preview Mapped Data</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th *ngFor="let variable of systemVariables">{{ variable }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of mappedData">
+            <td *ngFor="let variable of systemVariables">
+              {{ row[variable] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="d-flex justify-content-center pt-2 pb-2 mx-auto text-center align-items-center">
+    <button type="button" id="back_button" class="btn btn-primary mr-5" (click)="previous()" [disabled]="currentTab === 1">Previous</button>
+    <button type="button" id="next_button" class="btn btn-success" (click)="next()" *ngIf="currentTab < 3">Next</button>
+    <button class="btn btn-success" (click)="finalizeImport()" [disabled]="isSubmitting" *ngIf="currentTab === 3">Finish</button>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="205.9" height="219.287" viewBox="0 0 205.9 219.287">
+  <g id="Group_31258" data-name="Group 31258" transform="translate(-1483.805 -248.317)">
+    <g id="Group_31256" data-name="Group 31256" transform="translate(95)">
+      <path id="Icon_awesome-shield-alt" data-name="Icon awesome-shield-alt" d="M187.8,34.675l-79.56-33.15a19.952,19.952,0,0,0-15.29,0L13.39,34.675A19.869,19.869,0,0,0,1.125,53.031c0,82.253,47.446,139.105,91.784,157.586a19.952,19.952,0,0,0,15.29,0c35.512-14.793,91.825-65.885,91.825-157.586A19.9,19.9,0,0,0,187.8,34.675Z" transform="translate(1391.18 251.742)" fill="#68d2c0"/>
+      <path id="Icon_awesome-shield-alt-2" data-name="Icon awesome-shield-alt" d="M187.8,34.675l-79.56-33.15a19.952,19.952,0,0,0-15.29,0L13.39,34.675A19.869,19.869,0,0,0,1.125,53.031c0,82.253,47.446,139.105,91.784,157.586a19.952,19.952,0,0,0,15.29,0c35.512-14.793,91.825-65.885,91.825-157.586A19.9,19.9,0,0,0,187.8,34.675Z" transform="translate(1391.18 251.889)" fill="none" stroke="#4e5868" stroke-width="7"/>
+    </g>
+    <text id="Protection_Level_Strong" data-name="Protection Level
+Strong" transform="translate(1586 325)" fill="#4e5868" font-size="17" font-family="Mulish-Bold, Mulish" font-weight="700"><tspan x="-64" y="0">Protection Level</tspan><tspan fill="#fff" font-size="32" font-family="Mulish-ExtraBold, Mulish" font-weight="800"><tspan x="-52" y="36">Strong</tspan></tspan></text>
+  </g>
+</svg>

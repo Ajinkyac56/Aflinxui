@@ -1,0 +1,168 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~ngx-toastr/toastr';
+
+/* html, body { height: 100%; } */
+body { margin: 0;}
+
+.mat-datepicker-input.ng-pristine.ng-invalid.ng-touched {
+    border: 0px solid #f44336 !important;
+}
+
+.mat-datepicker-input.ng-touched.ng-dirty.ng-invalid{
+    border: 0px solid #f44336 !important;
+}
+
+input.ng-pristine.ng-invalid.ng-touched {
+    border:  2px solid #f44336 !important;
+}
+
+input.ng-touched.ng-dirty.ng-invalid {
+    border:  2px solid #f44336 !important;
+}
+select.ng-pristine.ng-invalid.ng-touched {
+    border:  2px solid #f44336 !important;
+    opacity: 1;
+}
+
+select.ng-touched.ng-dirty.ng-invalid {
+    border:  2px solid #f44336 !important;
+    opacity: 1;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.4em 0 0.4em 0;
+}
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0em 0;
+    padding-bottom: 0px;
+}
+.toast-success {
+    background-color: #0F456B;
+}
+
+.toast-error {
+    background-color: red !important
+}
+
+.toast-info {
+    background-color: blue !important
+}
+
+.cdk-overlay-container { 
+    z-index: 1200 !important; 
+}
+
+.mat-mdc-form-field {
+  --mdc-outlined-text-field-outline-color: #dfe5ef !important; 
+  --mdc-outlined-text-field-outline-width: 1px;
+}
+
+.mat-mdc-form-field.mat-form-field-invalid .mdc-notched-outline {
+  border-color: #ff4d4f !important; 
+}
+
+.mat-mdc-select-placeholder {
+  font-size: .875rem !important;
+  font-weight: 400 !important;
+  color: #5a6a85 !important; 
+}
+
+.mat-mdc-floating-label {
+  font-size: .875rem !important;
+  font-weight: 400 !important;
+}
+
+.mat-mdc-select.mat-mdc-select-focused .mat-mdc-select-placeholder {
+  font-size: .75rem !important; 
+  font-weight: 500 !important; 
+}
+
+.mdc-notched-outline {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: 70% !important;
+  text-align: left;
+  pointer-events: none;
+}
+
+/* Apply global font styles to mat-option inside mat-select */
+.mat-mdc-option {
+  font-size: .875rem !important;
+  font-size: 14px !important;
+  color: #5a6a85 !important;
+}
+
+/* Ensure the font is applied to the selected option */
+.mat-mdc-select-value {
+  font-size: .875rem !important;
+  font-size: 14px !important;
+  color: #5a6a85 !important;
+}
+
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Global button styles for action buttons */
+.action-button {
+  min-width: 30px;  
+  height: 30px;
+  padding: 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 4px;
+  transition: opacity 0.3s ease;
+  background-color: inherit; 
+  color: inherit;
+  border: 1px solid;  
+  position: relative; 
+  overflow: hidden; 
+  width: 30px;  
+ 
+}
+
+/* Set icon size uniformly */
+.action-button i {
+  font-size:10px; 
+ 
+}
+
+.align-btn{
+  margin-left: -10px;
+}
+
+.btn-group {
+  display: flex;
+  align-items: center; 
+  gap: 15px;
+}
+
+.btn-group a {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+.mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding: 10px !important;
+}

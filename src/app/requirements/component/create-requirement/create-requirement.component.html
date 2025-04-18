@@ -1,0 +1,139 @@
+<div class="container-fluid">
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading" *ngIf="!isView && !isEdit; else editCaseHeader">
+            <i class="ti ti-user-plus me-2"></i>Create Requirement
+          </h5>
+          <ng-template #editCaseHeader>
+            <h5 class="fw-semibold page-heading" *ngIf="!isView; else viewCaseHeader">Edit Requirement</h5>
+          </ng-template>
+          <ng-template #viewCaseHeader>
+            <h5 class="fw-semibold page-heading">View Requirement</h5>
+          </ng-template>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/requirement/manage-requirements']" class="text-muted">>&nbsp;Manage Requirement</a>
+            </li>
+            <li class="breadcrumb-item text-dark" aria-current="page" *ngIf="!isView && !isEdit; else smalleditCaseHeader">
+              >&nbsp;Create Requirement
+            </li>
+            <ng-template #smalleditCaseHeader>
+              <li class="breadcrumb-item text-muted" aria-current="page" *ngIf="!isView; else smallviewCaseHeader">>&nbsp;Edit Requirement</li>
+            </ng-template>
+            <ng-template #smallviewCaseHeader>
+              <li class="breadcrumb-item text-dark" aria-current="page">>&nbsp;View Requirement</li>
+            </ng-template>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--------------Main Content----------->
+<form [formGroup]="createRequirementForm">
+  <div class="partner-details p-4">
+    <!-- Requirement Field -->
+    <div class="row">
+      <div class="col-md-12 col-lg-4" style="width: 100%">
+        <div class="mb-3">
+          <label for="Enter requirement" class="form-label">Requirement <span style="color: red">*</span></label>
+          <input type="text" class="form-control input" placeholder="Enter Requirement" formControlName="reqName" />
+          <div *ngIf="createRequirementForm.get('reqName')?.invalid && createRequirementForm.get('reqName')?.touched" class="text-danger">
+            Requirement is required.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Speciality Dropdown -->
+    <div class="row">
+      <div class="col-md-12 col-lg-4" style="width: 50%">
+        <div class="mb-3">
+          <div>
+            <label for="specialityName" class="form-label">Speciality <span style="color: red">*</span></label>
+          </div>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select placeholder="Select Speciality" formControlName="speciality">
+              <ngx-mat-select-search
+                [formControl]="specialitySearchControl"
+                placeholderLabel="Search Speciality"
+                noEntriesFoundLabel="Data not found">
+              </ngx-mat-select-search>
+              <mat-option *ngFor="let speciality of specialityData" [value]="speciality.name">
+                {{ speciality.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div *ngIf="createRequirementForm.get('speciality')?.invalid && createRequirementForm.get('speciality')?.touched" class="text-danger">
+            Speciality is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Dropdown -->
+      <div class="col-md-12 col-lg-4" style="width: 50%">
+        <div class="mb-3">
+          <label for="status" class="form-label">Status <span style="color: red">*</span></label>
+          <select class="form-select form-control custome-select" formControlName="status">
+            <option value="" selected disabled>Status</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+          <div *ngIf="createRequirementForm.get('status')?.invalid && createRequirementForm.get('status')?.touched" class="text-danger">
+            Status is required.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notes Field -->
+    <div class="row">
+      <div class="col-md-12 col-lg-4" style="width: 100%">
+        <div class="mb-3">
+          <label for="note-content" class="form-label">Notes</label>
+          <textarea id="note-content" class="form-control input" rows="5px" placeholder="Write notes" formControlName="notes"></textarea>
+          <div *ngIf="createRequirementForm.get('notes')?.invalid && createRequirementForm.get('notes')?.touched" class="text-danger">
+            Notes are required.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Requirement Logo -->
+    <div class="col-md-12 col-lg-4">
+      <div class="mb-3">
+        <label for="photo" class="form-label">Requirement Logo</label>
+        <div id="yourFile" (click)="uploadFileClick('upFile-ho')" class="upload-file form-control">
+          <span *ngIf="!userPhoto && !createRequirementForm.get('requirementLogo')?.value">Upload File</span>
+          <span *ngIf="userPhoto">{{ userPhoto.name }}</span>
+          <span *ngIf="!userPhoto && createRequirementForm.get('requirementLogo')?.value">{{
+            createRequirementForm.get('requirementLogo')?.value
+          }}</span>
+          <img src="assets/image/onboarding/Upload.svg" alt="Upload Icon" />
+        </div>
+        <input id="upFile-ho" type="file" formControlName="requirementLogo" class="form-control d-none" (change)="fileUpload($event)" />
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="row my-5">
+      <div class="col-md-6 text-center mx-auto">
+        <button *ngIf="!isView && !isEdit; else editButton" class="btn btn-primary" (click)="onSubmit()">SUBMIT</button>
+        <ng-template #editButton>
+          <button *ngIf="!isView; else viewButton" class="btn btn-primary" (click)="updateRequriement()">SUBMIT</button>
+        </ng-template>
+        <ng-template #viewButton>
+          <button class="btn btn-primary" [routerLink]="['/dashboard/requirement/manage-requirements']">BACK</button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,36 @@
+<div class="modal-dialog modal-dialog-centered modal-xl">
+  <!-- Increased width -->
+  <div class="modal-content requirement-dialog p-4">
+    <!-- Modal Header -->
+    <div class="modal-header mb-3 d-flex">
+      <h5 class="modal-title fw-bold">Event Details</h5>
+      <!-- Close Button Aligned Right -->
+      <button type="button" class="btn-close bg-light ms-auto" (click)="closeDialog()" aria-label="Close"></button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body px-3">
+      <div class="d-flex flex-column">
+        <li class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot bg-primary me-3"></span> <strong>Title :</strong> {{ data.event.title }}
+        </li>
+        <li class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot bg-primary me-3"></span> <strong>Message Text :</strong> {{ data.event.extendedProps.messageText }}
+        </li>
+        <li class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot bg-primary me-3"></span> <strong>Start Date :</strong> {{ formattedStartDate }}
+        </li>
+        <li class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot bg-primary me-3"></span> <strong>End Date :</strong> {{ formattedEndDate }}
+        </li>
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div *ngIf="data.event.extendedProps.appointmentType !== 'Event'" class="modal-footer d-flex justify-content-center mt-4">
+      <button type="button" class="btn btn-secondary btn-sm" (click)="onClick(data.event)" style="background-color: rgb(15, 69, 107)">
+        Reschedule
+      </button>
+    </div>
+  </div>
+</div>

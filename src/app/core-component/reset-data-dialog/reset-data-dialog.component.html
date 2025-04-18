@@ -1,0 +1,25 @@
+<div class="modal-dialog modal-dialog-centered w-100 h-100 m-0">
+  <div class="modal-content d-flex flex-column h-100 p-4">
+    <div class="modal-header border-bottom pb-3">
+      <h5 class="modal-title">Confirm Reset Data</h5>
+      <button type="button" class="btn-close" (click)="closeDialog()"></button>
+    </div>
+    <form [formGroup]="resetForm" (ngSubmit)="confirmReset()" class="d-flex flex-column flex-grow-1">
+      <div class="modal-body">
+        <p class="mb-3 text-center">Please enter the following code to reset data:</p>
+        <h3 class="text-danger text-center mb-4">{{ randomString }}</h3>
+
+        <div class="row g-4 justify-content-center">
+          <div class="col-10">
+            <label class="form-label">Enter Code <span class="text-danger">*</span></label>
+            <input class="form-control p-2" (paste)="preventPaste($event)" formControlName="confirmationInput" placeholder="Enter code" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center mt-4">
+        <button class="btn btn-secondary px-4 py-2 me-3" type="button" (click)="closeDialog()">Cancel</button>
+        <button class="btn btn-primary px-4 py-2" type="submit" [disabled]="resetForm.invalid">Confirm</button>
+      </div>
+    </form>
+  </div>
+</div>

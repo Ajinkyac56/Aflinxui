@@ -1,0 +1,167 @@
+<!-- Preloader -->
+
+<!-- Body Wrapper -->
+<body class="signin-body">
+  <div class="">
+    <div class="container-fluid">
+      <div class="row g-0">
+        <div class="col-sm-12 col-md-12 col-lg-6 signin-section text-center" style="height: 720px; margin-top: 175px">
+          <div class="text-center"><img class="logo img-fluid" src="assets/images/asego/logo.png" width="200px" /></div>
+          <div class="mt-1">
+            <form class="signin-form text-center p-4" method=" " action="" [formGroup]="signForm">
+              <div class="input-group mb-3">
+                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  formControlName="userName"
+                  placeholder="Enter Username" />
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+
+                <input
+                  type="password"
+                  class="form-control"
+                  [type]="showPassword ? 'text' : 'password'"
+                  id="exampleInputPassword1"
+                  formControlName="password"
+                  placeholder="Enter Password" />
+
+                <i
+                  (click)="togglePasswordVisibility()"
+                  class="password-icon"
+                  [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"
+                  style="position: absolute; right: 10px; top: 13px; cursor: pointer"></i>
+              </div>
+              <div class="signin-buttons">
+                <!-- <button type="button" class="btn btn-light w-75 mr-5" (click)="becomePartner()">BECOME A PARTNER</button> -->
+                <button type="submit" class="btn btn-primary w-50" (click)="signin()">SIGN IN</button>
+              </div>
+              <br />
+              <a routerLink="/forgot-password" class="forgot-password-link">Forgot Password?</a>
+            </form>
+          </div>
+
+          <div class="mt-3 services">
+            <div class="text-center mx-3">
+              <img src="assets/image/medical.svg" />
+              <p class="text-dark">
+                24X7 medical <br />
+                assistance
+              </p>
+            </div>
+            <div class="text-center mx-3">
+              <img src="assets/image//customisable.svg" />
+              <p class="text-dark">
+                Customisable <br />
+                permissions
+              </p>
+            </div>
+            <div class="text-center mx-3">
+              <img src="assets/image/fast-track.svg" />
+              <p class="text-dark">
+                Fast track <br />
+                rediness report
+              </p>
+            </div>
+          </div>
+
+          <!--
+
+          <p class="text-center partners-heading">Trusted by 18,000+ Airmens</p>
+          <div class="bxslider d-flex justify-content-center">
+            <div class="partner-slide">
+               <img src="assets/image/partner-images/indigo.png" /> 
+            </div>
+
+            <div class="partner-slide">
+              <img src="assets/image/partner-images/vfs.png" /> 
+            </div>
+
+            <div class="partner-slide">
+              <img src="assets/image/partner-images/gbl.png" /> 
+            </div>
+
+            <div class="partner-slide">
+               <img src="assets/image/partner-images/fcm.png" /> 
+            </div>
+
+            <div class="partner-slide">
+               <img src="assets/image/partner-images/yatra.png" /> 
+            </div>
+
+            <div class="partner-slide">
+               <img src="assets/image/partner-images/nata.svg" /> 
+            </div>
+            <div class="partner-slide">
+               <img src="assets/image/partner-images/tbo.png" /> 
+            </div>
+
+            <div class="partner-slide">
+               <img src="assets/image/partner-images/ttk.png" /> 
+            </div>
+            <div class="partner-slide">
+               <img src="assets/image/partner-images/uniglobe.png" /> 
+            </div>
+            <div class="partner-slide">
+               <img src="assets/image/partner-images/vacation_exotica.png" /> 
+            </div>
+          </div>
+      -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content password-modal">
+        <div class="modal-body">
+          <div class="text-center">
+            <form class="mt-2">
+              <div class="input-password mb-3 mt-3">
+                <input type="password" class="form-control input" placeholder="Current Password" />
+                <i class="fa fa-lock"></i>
+              </div>
+              <div class="input-password mb-3">
+                <input type="password" class="form-control input" placeholder="New password" />
+                <i class="fa fa-lock"></i>
+              </div>
+              <div class="input-password mb-3">
+                <input type="password" class="form-control input" placeholder="Confirm New Password" />
+                <i class="fa fa-lock"></i>
+                <i class="fa fa-eye-slash icon"></i>
+              </div>
+              <button class="btn btn-primary mt-2 mb-3">UPDATE PASSWORD</button>
+            </form>
+          </div>
+          <!-- <div class="top-right-close">
+                      <h6> <button type="button" class="close " data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times" style="color:#585858;"></i></button></h6>
+                  </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      var a = $('.bxslider').bxSlider({
+        minSlides: 2,
+        maxSlides: 3,
+        mode: 'horizontal',
+        adaptiveHeight: true,
+        slideWidth: 150,
+        moveSlides: 10,
+        auto: true,
+        pager: false,
+        slideMargin: 5,
+        controls: false,
+      });
+    });
+  </script>
+</body>

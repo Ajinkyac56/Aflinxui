@@ -1,0 +1,11 @@
+.arrow-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-loader img {
+  width: 110px;
+  height: auto;
+}

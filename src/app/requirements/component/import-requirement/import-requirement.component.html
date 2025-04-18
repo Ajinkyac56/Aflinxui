@@ -1,0 +1,136 @@
+<div class="container-fluid">
+  <!-- Header -->
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-12">
+          <h5 class="fw-semibold page-heading"><i class="ti ti-user-plus me-2"></i>Import Requirements</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/requirement/manage-requirements']" class="text-muted">>&nbsp;Manage Requirement</a>
+            </li>
+            <li class="breadcrumb-item text-dark" aria-current="page" *ngIf="!isView && !isEdit; else smalleditCaseHeader">
+              >&nbsp;Import Requirement
+            </li>
+            <ng-template #smalleditCaseHeader>
+              <li class="breadcrumb-item text-muted" aria-current="page" *ngIf="!isView; else smallviewCaseHeader">> Edit Requirement</li>
+            </ng-template>
+            <ng-template #smallviewCaseHeader>
+              <li class="breadcrumb-item text-muted" aria-current="page">> Import Requirement</li>
+            </ng-template>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Navigation and Download Button Container -->
+  <div class="d-flex justify-content-between align-items-center mt-4 px-2">
+    <nav class="nav nav-tab nav-fill flex-grow-0">
+      <button class="tab-pills mr-5" [class.active]="currentTab === 1" aria-label="Select File">
+        <div class="bullet px-3">
+          <span>1</span>
+        </div>
+        <p class="ml-2">Select File</p>
+      </button>
+      <button class="tab-pills mr-5" [class.active]="currentTab === 2" aria-label="Map Variables">
+        <div class="bullet px-3">
+          <span>2</span>
+        </div>
+        <p class="ml-2">Map Variables</p>
+      </button>
+      <button class="tab-pills mr-5" [class.active]="currentTab === 3" aria-label="Preview">
+        <div class="bullet px-3">
+          <span>3</span>
+        </div>
+        <p class="ml-2">Preview</p>
+      </button>
+    </nav>
+    <button class="btn btn-primary ml-3" (click)="downloadTemplate()"><i class="fs-4 ti ti-download" style="color: #fff"></i> Download Sample</button>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content mt-4">
+    <!-- Tab 1: Select File -->
+    <div *ngIf="currentTab === 1">
+      <div id="upload-section" class="text-center">
+        <div id="uploadArea" class="upload-area border border-dashed rounded p-4 mb-3" (click)="fileInput.click()">
+          <img src="assets/image/claim-module/file.svg" alt="Upload Icon" class="upload-icon mb-3" />
+          <p class="upload-instructions">Choose a file or drag & drop it here</p>
+          <p class="upload-support-text text-muted">Excel formats (.xls, .xlsx, .csv)</p>
+        </div>
+        <input #fileInput type="file" class="d-none" accept=".xls,.xlsx,.csv" (change)="onFileChange($event)" />
+        <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
+      </div>
+    </div>
+
+    <div *ngIf="currentTab === 2">
+      <h3>Map Excel Columns to System Variables</h3>
+      <div *ngFor="let variable of headers; let i = index">
+        <div class="row align-items-start mt-3">
+          <div class="col-md-6">
+            <input type="text" class="form-control" [attr.aria-label]="'Excel Header ' + (i + 1)" [value]="variable" readonly />
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select [(ngModel)]="mapping[variable]" placeholder="Select Requirement">
+                <ngx-mat-select-search
+                  [formControl]="requirementSearchControl"
+                  placeholderLabel="Search requirements"
+                  noEntriesFoundLabel="No requirements found"></ngx-mat-select-search>
+                <mat-option *ngFor="let variable of filteredSystemVariables" [value]="variable">
+                  {{ variable }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="mappingError" class="alert alert-danger mt-2">{{ mappingError }}</div>
+    </div>
+
+    <div *ngIf="currentTab === 3">
+      <h3>Preview Mapped Data</h3>
+      <div class="claim-table card mt-3" style="overflow-x: auto">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <ng-container *ngIf="requirementDueUser.length > 0">
+                <ng-container *ngFor="let req of requirementDueUser[0]?.requirementDetails">
+                  <th>{{ req.requirementName + ' Due Date' }}</th>
+                  <th>{{ req.requirementName + ' Status' }}</th>
+                </ng-container>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of requirementDueUser">
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.email }}</td>
+              <ng-container *ngFor="let req of user.requirementDetails">
+                <td>{{ req.requirementDate }}</td>
+                <td>{{ req.requirementStatus }}</td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="d-flex justify-content-center pt-2 pb-2 mx-auto text-center align-items-center">
+    <button type="button" class="btn btn-primary mr-5" (click)="previous()" [disabled]="currentTab === 1">Previous</button>
+    <button type="button" class="btn btn-success" (click)="next()" *ngIf="currentTab < 3">Next</button>
+    <button type="button" class="btn btn-success" (click)="finalizeImport()" [disabled]="isSubmitting" *ngIf="currentTab === 3">Finish</button>
+  </div>
+</div>

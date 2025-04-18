@@ -1,0 +1,81 @@
+<div class="modal-dialog modal-dialog-centered modal-xl" style="min-width: 508px">
+  <!-- Increased width -->
+  <div class="modal-content requirement-dialog p-4">
+    <!-- Modal Header -->
+    <div class="modal-header mb-3 d-flex">
+      <h5 class="modal-title fw-bold">Response Details</h5>
+      <!-- Close Button Aligned Right -->
+      <button type="button" class="btn-close bg-light ms-auto" (click)="closeDialog()" aria-label="Close"></button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body px-3">
+      <div class="d-flex flex-column">
+        <li class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot bg-primary me-3"></span> <strong>Type :</strong> {{ userListResponse[0].messageType }}
+        </li>
+        <li class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot bg-primary me-3"></span> <strong>Message Text :</strong> {{ userListResponse[0].messageText }}
+        </li>
+        <li class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot bg-primary me-3"></span> <strong>Message Title :</strong> {{ userListResponse[0].messageTitle }}
+        </li>
+        <li *ngIf="messageType === 'Poll'" class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot bg-primary me-3"></span><strong>Poll Answer:</strong> {{ getPollOptionName() }}
+        </li>
+
+        <!-- <div *ngIf="messageType === 'Poll'">
+          <li class="d-flex align-items-center py-2">
+            <span class="bullet bullet-dot bg-primary me-3"></span>
+            <strong>Poll :</strong> <span style="font-weight: bold">{{ userListResponse[0].messageTitle }}</span>
+          </li>
+          <div class="ps-4">
+            <div *ngFor="let option of getPollResponse" class="form-check">
+              <input class="form-check-input" type="radio" name="pollRadio" [id]="'pollRadio' + option.optionNumber"
+                [value]="option.pollOptionId" [checked]="option.pollOptionId === userListResponse[0].pollAnswer"
+                disabled />
+              <label class="form-check-label" [for]="'pollRadio' + option.optionNumber" style="font-size: small">
+                {{ option.pollOptionName }}
+              </label>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- poll progress bar  -->
+        <!-- <div *ngIf="messageType === 'Poll'">
+          <li class="d-flex align-items-center py-2">
+            <span class="bullet bullet-dot bg-primary me-3"></span>
+            <strong>Poll Answer :</strong>
+          </li>
+          <div class="ps-4">
+            <div *ngFor="let option of pollResponsePercentage" class="mb-3">
+              <div class="d-flex align-items-center mb-2">
+                <input class="form-check-input" type="radio" name="pollRadio" [id]="'pollRadio'"
+                  [value]="option.pollOptionId" [checked]="getPollOptionName() === userListResponse[0].pollAnswer"
+                  disabled />
+                <label class="form-check-label ms-2" [for]="'pollRadio'">
+                  {{ option.pollOptionName }}
+                </label>
+              </div>
+              <div class="position-relative">
+                <div class="progress" style="height: 25px">
+                  <div class="progress-bar bg-lightblue" role="progressbar" [style.width]="option.percentage + '%'"
+                    aria-valuenow="option.percentage" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="position-absolute"
+                  style="right: 0; top: 50%; transform: translateY(-50%); font-weight: bold">
+                  {{ option.percentage | number : '1.0-0' }}%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- end progress bar  -->
+
+        <li *ngIf="messageType !== 'Poll' && messageType !== 'Event'" class="d-flex align-items-center py-2">
+          <span class="bullet bullet-dot bg-primary me-3"></span><strong>Response:</strong> {{ userListResponse[0].openResponse }}
+        </li>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<div class="container-fluid">
+  <!-- Profile Header -->
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading"><i class="fa-solid fa-comment me-2"></i>Inbox</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/requirement/manage-requirements']" class="text-dark">>&nbsp;My Message</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <section class="mb-2">
+      <div class="mt-2">
+        <form [formGroup]="messageListForm">
+          <div class="row">
+            <div class="col-md-12 col-lg-4">
+              <input type="text" class="form-control input" name="userName" placeholder="Search Message" formControlName="userName" />
+            </div>
+            <div class="col-md-12 col-lg-4">
+              <button type="button" class="btn btn-rounded btn-primary w-100 search-btn" matTooltip="Search">
+                <i class="ti ti-search" style="font-size: 21px"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-2" id="createNudgeGroup">
+            <div style="overflow-x: auto" class="card mt-4 mb-5">
+              <table class="table table-striped">
+                <thead class="table-head">
+                  <tr>
+                    <th scope="col" class="table-heading">Sender</th>
+                    <th scope="col" class="table-heading">Title</th>
+                    <th scope="col" class="table-heading">Requirement</th>
+                    <th scope="col" class="table-heading">Type</th>
+                    <th scope="col" class="table-heading" style="color: #5a6a85; width: 100px">
+                      <div class="dropdown dropstart">
+                        <a href="#" class="fw-bolder" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="color: #5a6a85">
+                          Action <i class="fa fa-caret-down fs-2 ml-2" style="color: #0f456b"></i>
+                        </a>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="insurer-table">
+                  <tr *ngFor="let items of messageList">
+                    <td>{{ items.senderName }}</td>
+                    <td>{{ items.messageTitle }}</td>
+                    <td>{{ getRequirementName(items.reqId) }}</td>
+                    <td>{{ items.messageType }}</td>
+                    <td>
+                      <ng-container *ngIf="expandAction; else showButtons">
+                        <div class="dropdown dropstart">
+                          <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="ti ti-dots fs-5" style="color: #0f456b"></i>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li>
+                              <a class="dropdown-item d-flex align-items-center gap-3" (click)="onViewClick(items)">
+                                <i class="fa-solid fa-eye" style="color: #0f456b"></i>View
+                              </a>
+                            </li>
+                            <li *ngIf="items.messageType === 'Appointment' && !items.slotId">
+                              <a class="dropdown-item d-flex align-items-center gap-3" (click)="selectSlotClick(items)">
+                                <i class="fs-4 ti ti-calendar" style="color: #0f456b"></i>Choose Slot
+                              </a>
+                            </li>
+                            <li *ngIf="items.slotId">
+                              <a class="dropdown-item d-flex align-items-center gap-3" (click)="selectSlotClick(items)">
+                                <i class="fas fa-wand-magic" style="color: #0f456b"></i>Reschedule Appointment
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-template #showButtons>
+                        <div class="btn-group d-flex align-items-center" style="gap: 15px">
+                          <a (click)="onViewClick(items)" class="text-muted" title="View" style="cursor: pointer">
+                            <i class="fs-3 fa-solid fa-eye" style="color: #0f456b"></i>
+                          </a>
+                          <a
+                            *ngIf="items.messageType === 'Appointment' && !items.slotId"
+                            (click)="selectSlotClick(items)"
+                            class="text-muted"
+                            title="Choose Slot"
+                            style="cursor: pointer">
+                            <i class="fs-3 ti ti-calendar" style="color: #0f456b"></i>
+                          </a>
+                          <a
+                            *ngIf="items.slotId"
+                            (click)="selectSlotClick(items)"
+                            class="text-muted"
+                            title="Reschedule Appointment"
+                            style="cursor: pointer">
+                            <i class="fs-3 fas fa-wand-magic" style="color: #0f456b"></i>
+                          </a>
+                        </div>
+                      </ng-template>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="col-sm-6 align-self-center" style="width: 200px">
+              <a class="btn d-flex fw-bolder" id="loadMore" (click)="loadMore()" *ngIf="canLoadMore">Load More...</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>

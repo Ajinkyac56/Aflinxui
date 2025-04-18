@@ -1,0 +1,33 @@
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content d-flex flex-column p-4">
+    <div class="modal-header border-bottom pb-3">
+      <h5 class="modal-title">{{ data ? 'Edit Sub Category' : 'Add Sub Category' }}</h5>
+      <button type="button" class="btn-close" (click)="closeDialog()"></button>
+    </div>
+    <form [formGroup]="subCategoryForm" (ngSubmit)="onSave()" class="d-flex flex-column flex-grow-1">
+      <div class="modal-body flex-grow-1">
+        <div class="row g-4">
+          <div class="col-12">
+            <label class="form-label">Category <span class="text-danger">*</span></label>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select placeholder="Select Category" formControlName="categoryId">
+                <ngx-mat-select-search [formControl]="categorySearchControl" placeholderLabel="Search Category" noEntriesFoundLabel="Data not found">
+                </ngx-mat-select-search>
+                <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
+                  {{ category.categoryName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Sub Category <span class="text-danger">*</span></label>
+            <input class="form-control" type="text" formControlName="subCategoryName" placeholder="Enter Sub Category" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center pt-3">
+        <button class="btn btn-primary" type="submit" [disabled]="subCategoryForm.invalid">SAVE</button>
+      </div>
+    </form>
+  </div>
+</div>

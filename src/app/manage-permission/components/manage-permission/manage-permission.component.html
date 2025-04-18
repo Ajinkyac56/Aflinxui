@@ -1,0 +1,124 @@
+<div class="container-fluid mx-2">
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading"><i class="ti ti-key me-2"></i>Manage Permissions</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/requirement/manage-requirements']" class="text-dark">>&nbsp;Manage Permissions</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!--------------------Main Content-------------->
+  <form [formGroup]="permissionForm">
+    <div class="row g-3">
+      <div class="col-md-6 col-lg-3 mt-3">
+        <select class="form-select form-control custome-select" formControlName="role" (change)="getNonPartnerAllUser()">
+          <option value="All" selected>Select Role</option>
+          <ng-container *ngFor="let role of roleData">
+            <option value="{{ role.name }}">
+              {{ role.name }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="col-md-6 col-lg-3 mt-3">
+        <select class="form-select form-control custome-select" id="onboarding-status" formControlName="user" (change)="onUserChange($event)">
+          <option value="All" selected disabled>Select Airmen</option>
+          <ng-container *ngFor="let user of userData">
+            <option value="{{ user.id }}">
+              {{ user.fullName }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-5 mb-0">
+      <div class="col-md-12 mb-0">
+        <div class="px-3 permission-title bg-light-danger pt-2 pb-2">
+          <div class="">
+            <span><b>Airmen:</b> {{ getUserName() }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-lg-3">
+        <div class="card permission-card p-0 pb-0">
+          <ul class="permission-list">
+            <div class="sub-list mt-1">
+              <li><input class="form-check-input success mr-5 mt-2" type="checkbox" (click)="onGroupClick(undefined, $event, 'All')" />ALL</li>
+              <li *ngFor="let group of permissionData">
+                <input class="form-check-input success mr-5 mt-2" type="checkbox" [id]="group.groupId" (change)="onGroupClick(group, $event, '')" />{{
+                  group.groupDisplayName
+                }}
+              </li>
+            </div>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-5 col-lg-9 px-0">
+        <div class="card permission-card p-4 pb-0">
+          <div class="row">
+            <ul>
+              <li><input class="form-check-input success mr-5" type="checkbox" value="" id="mycheckbox1" formControlName="selectAll" />Select All</li>
+              <li *ngFor="let featureItem of featureList; let itemCount = index">
+                <div class="accordion mt-2" id="accordionExample{{ itemCount }}" formGroupName="{{ featureItem.featureId }}">
+                  <span class="d-flex mt-0" id="headingOne{{ itemCount }}">
+                    <input class="form-check-input success mr-5" type="checkbox" value="" id="mycheckbox2{{ itemCount }}" formControlName="all" />
+                    <a
+                      class="accordion-button text-dark p-0"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      [attr.data-bs-target]="'#feature' + itemCount"
+                      aria-expanded="true"
+                      [attr.aria-controls]="'feature' + itemCount">
+                      {{ featureItem.featureDisplayName }}
+                    </a>
+                  </span>
+                  <div
+                    id="feature{{ itemCount }}"
+                    class="accordion-collapse collapse show"
+                    aria-labelledby="headingOne"
+                    [attr.data-bs-parent]="'#accordionExample' + itemCount">
+                    <ul class="px-4 collapse-list">
+                      <li *ngFor="let actionItem of featureItem.featureActionList">
+                        <input
+                          class="form-check-input success mr-5"
+                          type="checkbox"
+                          value=""
+                          id="mycheckbox2{{ itemCount }}"
+                          formControlName="{{ actionItem.actionId }}" />{{ actionItem.actionDisplayName }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-md-2 col-lg-2 mt-2">
+            <button class="btn btn-light-success mr-5 w-100">CANCEL</button>
+          </div>
+          <div class="col-md-2 col-lg-2 mt-2">
+            <button class="btn btn-primary w-100" (click)="savePermission()" [disabled]="!isUserSelected">SAVE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-----------------Main Content End-------------->
+</div>

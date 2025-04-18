@@ -1,0 +1,9 @@
+.text-danger {
+  color: red !important;
+}
+.text-warning {
+  color: orange !important;
+}
+.text-success {
+  color: green !important;
+}

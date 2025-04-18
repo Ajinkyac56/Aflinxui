@@ -1,0 +1,28 @@
+.accordion-button {
+    padding: 2px 0px;
+}
+
+.accordion-button::after {
+    margin-left: 20px !important;
+}
+
+.accordion-button:not(.collapsed) {
+    box-shadow: none !important;
+}
+
+.accordion-collapse li {
+    line-height: 30px;
+}
+
+.collapse-list li {
+    display: flex;
+    align-items: center;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url(../image/angle-down.png) !important;
+}
+
+.accordion-button::after {
+    --bs-accordion-btn-icon: url(../image/angle-down.png) !important;
+}

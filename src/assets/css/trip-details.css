@@ -1,0 +1,132 @@
+.bg-trip-details {
+    background: url(../image/manage-policy/three-friends-sitting-top-mountain-enjoying-scenic-view.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.trip-detail-img {
+    width: 200px;
+}
+
+.radio-group {
+    display: flex !important;
+}
+
+#new-slab {
+    display: none;
+}
+
+.add-slab-btn {
+    padding: 8px 16px 8px 16px;
+    background-color: #D8DDE3;
+    margin-top: 27px;
+}
+
+.add-slab-btn i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary:hover {
+    color: #fff !important;
+}
+
+.custom-search {
+    position: relative;
+    width: 100%;
+}
+
+.custom-search-input {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #dfe5ef;
+    border-radius: 7px;
+    padding: 10px 100px 10px 20px;
+    line-height: 1;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.custom-search-botton {
+    position: absolute;
+    right: 70px;
+    top: 36px;
+    bottom: 5px;
+    border: 0;
+    margin: 0;
+    padding: 0 0px;
+    z-index: 2;
+    background: transparent;
+}
+
+.custom-search-botton2 {
+    position: absolute;
+    right: 45px;
+    top: 36px;
+    bottom: 5px;
+    border: 0;
+    margin: 0;
+    padding: 0 0px;
+    z-index: 2;
+    background: transparent;
+}
+
+.custom-search-botton3 {
+    position: absolute;
+    right: 20px;
+    top: 36px;
+    bottom: 5px;
+    border: 0;
+    margin: 0;
+    padding: 0 0px;
+    z-index: 2;
+    background: transparent;
+}
+
+.text-43B0EF {
+    color: #43B0EF;
+    font-size: 13px;
+}
+
+
+/*--------------Responsive-----------*/
+
+@media screen and (max-width: 767px) {
+    .wizard-content-left {
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .radio-group {
+        display: block !important;
+    }
+    .trip-detail-img {
+        width: 150px;
+        top: -63px !important;
+        right: -19px !important;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .trip-detail-img {
+        width: 145px !important;
+    }
+    .radio-group {
+        display: block !important;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .radio-group {
+        display: flex !important;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .radio-group {
+        display: flex !important;
+    }
+}

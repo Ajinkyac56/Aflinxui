@@ -1,0 +1,19 @@
+.dialog-container {
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 16px; /* Add padding for better spacing */
+}
+
+.btn-close {
+  display: flex;
+  justify-content: flex-end; /* Align to the right */
+  padding: 10px; /* Add some padding */
+}
+.text-danger {
+  color: red !important;
+}
+.text-warning {
+  color: orange !important;
+}
+.text-success {
+  color: green !important;
+}

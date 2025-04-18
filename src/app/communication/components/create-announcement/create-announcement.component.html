@@ -1,0 +1,600 @@
+<div class="container-fluid">
+  <!-- Header -->
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading"><i class="ti ti-brand-messenger me-2"></i>Create Announcement</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/communication/announcements']" class="text-muted">>&nbsp;Announcement</a>
+            </li>
+            <li class="breadcrumb-item text-dark" aria-current="page" *ngIf="!isView && !isEdit; else smalleditCaseHeader">
+              >&nbsp;Create Announcement
+            </li>
+            <ng-template #smalleditCaseHeader>
+              <li class="breadcrumb-item text-muted" aria-current="page" *ngIf="!isView; else smallviewCaseHeader">>&nbsp;Edit announcement/li></li>
+            </ng-template>
+
+            <ng-template #smallviewCaseHeader>
+              <li class="breadcrumb-item text-muted" aria-current="page">>&nbsp;View Announcement/li></li>
+            </ng-template>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Navigation -->
+  <nav class="nav nav-tab nav-fill px-2 mt-4">
+    <button class="tab-pills mr-5" [class.active]="currentTab === 1" (click)="currentTab = 1">
+      <div class="bullet px-3">
+        <span>1</span>
+      </div>
+      <p class="ml-2">Create</p>
+    </button>
+    <button class="tab-pills mr-5" [class.active]="currentTab === 2" (click)="currentTab = 2" [disabled]="!isFormValid()">
+      <div class="bullet px-3">
+        <span>2</span>
+      </div>
+      <p class="ml-2" *ngIf="!createAnnouncement.get('userGroup').value">Select</p>
+      <p class="ml-2" *ngIf="createAnnouncement.get('userGroup').value === 'Group'">Select Groups</p>
+      <p class="ml-2" *ngIf="createAnnouncement.get('userGroup').value === 'Users'">Select Users</p>
+    </button>
+    <button class="tab-pills mr-5" [class.active]="currentTab === 3" (click)="currentTab = 3" [disabled]="!isFormValid()">
+      <div class="bullet px-3">
+        <span>3</span>
+      </div>
+      <p class="ml-2">Review</p>
+    </button>
+  </nav>
+
+  <!-- Tab Content -->
+  <div class="tab-content mt-4">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="createAnnouncement">
+          <!-- Tab 1: Form -->
+          <div *ngIf="currentTab === 1">
+            <div class="mb-3">
+              <label for="Title" class="form-label"
+                >Title
+                <span style="color: red">*</span>
+              </label>
+              <input type="text" class="form-control" id="Title12" name="title" placeholder="Enter Title" formControlName="title" required />
+              <div
+                *ngIf="
+                  createAnnouncement.get('title')?.invalid && (createAnnouncement.get('title')?.touched || createAnnouncement.get('title')?.dirty)
+                ">
+                <small *ngIf="createAnnouncement.get('title')?.errors?.['required']" style="color: red">Title is required.</small>
+              </div>
+            </div>
+            <!-- Message Type Radio Buttons -->
+            <!-- <div>
+              <div class="form-check form-check-inline mb-3">
+                <input class="form-check-input" type="radio" name="optionType" id="Direct" value="Direct"
+                  formControlName="optionType" />
+                <label class="form-check-label" for="inlineRadio3">Direct</label>
+              </div>
+              <div class="form-check form-check-inline mb-3">
+                <input class="form-check-input" type="radio" name="optionType" id="Poll" value="Poll"
+                  formControlName="optionType" />
+                <label class="form-check-label" for="Poll">Poll</label>
+              </div>
+              <div class="form-check form-check-inline mb-3">
+                <input class="form-check-input" type="radio" name="optionType" id="OpenResponse" value="OpenResponse"
+                  formControlName="optionType" />
+                <label class="form-check-label" for="inlineRadio5">Open Response</label>
+              </div>
+              <div class="form-check form-check-inline mb-3">
+                <input class="form-check-input" type="radio" name="optionType" id="EventMessage" value="Event"
+                  formControlName="optionType" (click)="restEventMessage()" />
+                <label class="form-check-label" for="inlineRadio6">Event</label>
+              </div>
+            </div> -->
+
+            <!-- Poll UI -->
+            <!-- <div *ngIf="createAnnouncement.get('optionType')?.value === 'Poll'">
+              <div class="card">
+                <div class="card-body">
+                  <div formArrayName="pollTextboxes">
+                    <div *ngFor="let control of pollTextboxes.controls; let i = index"
+                      class="d-flex align-items-center mb-3">
+                      <div class="row g-3">
+                        <div class="col">
+                          <label for="floatingNo{{ i }}" class="form-label"
+                            style="margin-top: 8.2px; font-weight: 61">NO. {{ i + 1 }}</label>
+                        </div>
+                        <div class="col">
+                          <input class="form-control" style="width: 29rem" type="text" placeholder="Enter Option"
+                            id="floatingTextarea{{ i }}" [formControlName]="i" />
+                        </div>
+                    
+                        <div
+                          *ngIf="control.get('option')?.invalid && (control.get('option')?.touched || control.get('option')?.dirty)">
+                          <small *ngIf="control.get('option')?.errors?.['required']" style="color: red">Option is
+                            required.</small>
+                        </div>
+                        <div class="col">
+                          <button type="button" class="btn btn-link text-danger" (click)="removeTextbox(i)">
+                            <i class="bi-trash fs-4"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-outline-primary" (click)="addTextbox()">Add Option</button>
+                </div>
+              </div>
+            </div> -->
+
+            <div *ngIf="optionType === 'Event'">
+              <label for="event" class="form-label"
+                >Select Event Date
+                <span style="color: red">*</span>
+              </label>
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                      <div class="mb-3">
+                        <label for="startDate" class="form-label">Start Date & Time <span style="color: red">*</span> </label>
+                        <input type="datetime-local" class="form-control" formControlName="startDate" [min]="minDate" id="startDateTime" />
+                        <div
+                          *ngIf="
+                            createAnnouncement.get('startDate')?.invalid &&
+                            (createAnnouncement.get('startDate')?.touched || createAnnouncement.get('startDate')?.dirty)
+                          ">
+                          <small *ngIf="createAnnouncement.get('startDate')?.errors?.['required']" style="color: red"
+                            >Start Date & Time is required.</small
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-lg-6">
+                      <label for="AvailableSlots" class="form-label">End Date & Time <span style="color: red">*</span> </label>
+                      <input type="datetime-local" class="form-control" formControlName="endDate" id="endDateTime" [min]="minDate" />
+                      <div
+                        *ngIf="
+                          createAnnouncement.get('endDate')?.invalid &&
+                          (createAnnouncement.get('endDate')?.touched || createAnnouncement.get('endDate')?.dirty)
+                        ">
+                        <small *ngIf="createAnnouncement.get('endDate')?.errors?.['required']" style="color: red">End Date & Time is required.</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="NudgeMessage" class="form-label">Nudge Message</label>
+              <textarea
+                class="form-control"
+                [class.is-invalid]="
+                  createAnnouncement.get('nudgeMessage')?.invalid &&
+                  (createAnnouncement.get('nudgeMessage')?.touched || createAnnouncement.get('nudgeMessage')?.dirty)
+                "
+                id="NudgeMessage"
+                formControlName="nudgeMessage"
+                placeholder="Write Nudge Message"></textarea>
+              <small *ngIf="createAnnouncement.get('nudgeMessage')?.invalid && createAnnouncement.get('nudgeMessage')?.touched" style="color: red">
+                Please write nudge message.
+              </small>
+            </div>
+            <div class="form-text mb-3" id="basic-addon4">{{ remainingChars }} character(s) remaining</div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-start align-items-center w-100">
+                <label class="form-check-label me-2" style="color: #606b7d; font-weight: bold; font-size: 13px" for="flex1"> Schedule Nudge? </label>
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    name="isScheduledNudge"
+                    id="flexSwitc1"
+                    formControlName="isScheduledNudge"
+                    (change)="onScheduleChange($event)" />
+                </div>
+              </div>
+            </div>
+            <div *ngIf="createAnnouncement.get('isScheduledNudge')?.value" class="mb-3">
+              <!-- Start Date/Time -->
+              <div class="col-3 mb-3">
+                <label for="nudgeStartDate" class="form-label">Date/Time</label>
+                <input type="datetime-local" class="form-control" formControlName="dateTime" id="nudgeStartDate" />
+              </div>
+            </div>
+            <div class="form-check form-check-inline mb-3">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="documentLink"
+                id="AttachDocument"
+                value="AttachDocument"
+                formControlName="documentLink"
+                (change)="onRadioButtonChange()" />
+              <label class="form-check-label" for="inlineRadio7">Attach Document</label>
+            </div>
+            <div class="form-check form-check-inline mb-3">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="documentLink"
+                id="InsertLink"
+                value="InsertLink"
+                formControlName="documentLink"
+                (change)="onRadioButtonChange()" />
+              <label class="form-check-label" for="inlineRadio8">Insert Link</label>
+            </div>
+
+            <div *ngIf="createAnnouncement.get('documentLink')?.value === 'AttachDocument'">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">File Upload:</label>
+                <div id="yourFile" (click)="uploadFileClick('upFile-ho')" class="upload-file form-control">
+                  <span *ngIf="!filename">Upload File</span>
+                  <span *ngIf="filename">{{ filename }}</span>
+                  <img src="assets/image/onboarding/Upload.svg" alt="Upload Icon" />
+                </div>
+                <input id="upFile-ho" type="file" class="form-control d-none" (change)="fileUpload($event)" formControlName="attachmentDocument" />
+              </div>
+            </div>
+            <div *ngIf="createAnnouncement.get('documentLink')?.value === 'InsertLink'">
+              <div class="mb-3">
+                <label for="link" class="form-label">Link</label>
+                <input type="text" class="form-control" id="link" aria-describedby="link" formControlName="link" placeholder="Enter URL" />
+              </div>
+            </div>
+          </div>
+          <!-- Tab 2: Select Users -->
+          <div *ngIf="currentTab === 2">
+            <section class="mb-2">
+              <div class="mt-2" id="createAnnoucement">
+                <div class="d-flex w-100" style="margin-bottom: 15px">
+                  <div class="form-check form-check-inline mb-2">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="userGroup"
+                      id="Group"
+                      value="Group"
+                      formControlName="userGroup"
+                      (change)="onGroupChanged('Group')" />
+                    <label class="form-check-label" for="inlineRadio1">Group</label>
+                  </div>
+                  <div class="form-check form-check-inline mb-2">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="userGroup"
+                      id="Users"
+                      value="Users"
+                      formControlName="userGroup"
+                      (change)="onGroupChanged('Users')" />
+                    <label class="form-check-label" for="inlineRadio2">Users</label>
+                  </div>
+
+                  <!-- Summary card -->
+                  <div *ngIf="optionType === 'Event'" style="flex-grow: 2; margin-left: 10px; height: 60px">
+                    <div class="w-100" style="height: 5rem; -webkit-text-stroke-width: thin; margin-top: -2rem">
+                      <div class="card-body" style="margin-left: 9rem">
+                        <div class="d-flex justify-content-between">
+                          <div>
+                            <p><strong>Selected Users :</strong> {{ conflictSummary?.totalUser || 0 }}</p>
+                          </div>
+                          <div>
+                            <p><strong>Conflict Users :</strong> {{ conflictSummary?.conflictUser || 0 }}</p>
+                          </div>
+                          <div>
+                            <p><strong>Conflict Percentage :</strong> {{ conflictSummary?.conflictPercentage || 0 }}%</p>
+                          </div>
+                          <!-- <div class="d-flex justify-content-end">
+                            <button class="btn btn-primary reset-btn" type="button" matTooltip="Refresh"
+                              (click)="resetFilter()">
+                              <i class="fs-7 ti ti-refresh"></i>
+                            </button>
+                          </div> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="d-flex mb-3" style="flex-grow: 1; max-width: 33%; margin-right: 10px; flex-direction: row-reverse; gap: 10px">
+                    <!-- Search Button -->
+                    <div style="width: 60px">
+                      <button class="btn btn-rounded btn-primary w-100 search-btn" matTooltip="Search" (click)="searchOnCondition()">
+                        <i class="ti ti-search" style="font-size: 21px"></i>
+                      </button>
+                    </div>
+
+                    <!-- Search Input Field -->
+                    <div class="flex-grow-1">
+                      <input
+                        type="text"
+                        class="form-control input"
+                        name="search"
+                        placeholder="Enter User Name"
+                        formControlName="userName"
+                        style="height: fit-content" />
+                    </div>
+                  </div>
+
+                  <!-- User Group Section -->
+                  <div *ngIf="createAnnouncement.get('userGroup')?.value === 'Users'">
+                    <div style="overflow-x: auto; max-width: 100%; height: 459px; overflow-y: auto" class="card mt-2 mb-5">
+                      <table class="table table-striped">
+                        <thead class="table-head">
+                          <tr>
+                            <th>
+                              <input
+                                class="form-check-input success"
+                                type="checkbox"
+                                value=""
+                                id="mycheckbox1"
+                                (change)="checkBoxValueClicked($event, 'all', null, 'userData')"
+                                [checked]="selectData.length === datafilerecords.length" />
+                            </th>
+                            <th></th>
+                            <th scope="col" class="table-heading">Full Name</th>
+                            <th scope="col" class="table-heading">Email</th>
+                            <th *ngIf="optionType === 'Event'">Availability</th>
+                          </tr>
+                        </thead>
+                        <tbody class="insurer-table">
+                          <tr *ngFor="let user of datafilerecords">
+                            <td>
+                              <input
+                                class="form-check-input success"
+                                type="checkbox"
+                                value=""
+                                id="mycheckbox1{{ user.id }}"
+                                (change)="checkBoxValueClicked($event, 'item', user, 'userData')"
+                                [checked]="isUserSelected(user)" />
+                            </td>
+                            <td>
+                              <div class="user-profile-img">
+                                <img
+                                  [src]="user.photo ? user.photo : 'assets/images/profile/user-1.jpg'"
+                                  class="rounded-circle"
+                                  width="35"
+                                  height="35"
+                                  alt="" />
+                              </div>
+                            </td>
+                            <td>{{ user.fullName }}</td>
+                            <td>{{ user.email }}</td>
+                            <td *ngIf="optionType === 'Event'">
+                              <span
+                                [style.background-color]="user.hasAppointment ? 'red' : 'green'"
+                                [style.width]="'10px'"
+                                [style.height]="'10px'"
+                                [style.border-radius]="'50%'"
+                                [style.display]="'inline-block'"></span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <!-- Load More Button -->
+                      <div class="col-sm-6 align-self-center" style="width: 200px">
+                        <a class="btn d-flex fw-bolder" id="loadMore" (click)="loadMore()" *ngIf="canLoadMore">Load More...</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Group Section -->
+                  <div *ngIf="createAnnouncement.get('userGroup')?.value === 'Group'">
+                    <div style="overflow-x: auto; max-width: 100%; height: 459px; overflow-y: auto" class="card mt-2 mb-5">
+                      <table class="table table-striped">
+                        <thead class="table-head">
+                          <tr>
+                            <th>
+                              <input
+                                class="form-check-input success"
+                                type="checkbox"
+                                value=""
+                                id="mycheckbox2"
+                                (change)="checkBoxValueClicked($event, 'all', null, 'groupData')"
+                                [checked]="dataGroupRecord.length === dataGroupFile.length" />
+                            </th>
+                            <th scope="col" class="table-heading">Name</th>
+                            <th scope="col" class="table-heading">Description</th>
+                            <th scope="col" class="table-heading">Count</th>
+                          </tr>
+                        </thead>
+                        <tbody class="insurer-table">
+                          <tr *ngFor="let items of dataGroupFile">
+                            <td>
+                              <input
+                                class="form-check-input success"
+                                type="checkbox"
+                                value=""
+                                id="mycheckbox2"
+                                (change)="checkBoxValueClicked($event, 'item', items, 'groupData')"
+                                [checked]="isGroupSelected(items)" />
+                            </td>
+                            <td>{{ items.messageGroupName }}</td>
+                            <td>{{ items.messageGroupDesc }}</td>
+                            <td>{{ items.userCount }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <div class="col-sm-6 align-self-center" style="width: 200px">
+                        <a class="btn d-flex fw-bolder" id="loadMore" (click)="loadMore()" *ngIf="canLoadMore">Load More...</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <!-- Tab 3 : Review The Form -->
+          <div *ngIf="currentTab === 3">
+            <h3 class="mb-3">Form Review</h3>
+            <div class="container-fluid" style="max-height: 70vh; overflow-y: auto">
+              <div class="row g-3 mb-3">
+                <div class="col-12 col-md-6">
+                  <label for="sendto" class="form-label" style="margin-bottom: 0">Send To</label>
+                  <input
+                    type="text"
+                    readonly
+                    class="form-control-plaintext"
+                    id="sendto"
+                    value="{{ createAnnouncement.get('userGroup')?.value === 'Group' ? 'Group' : 'Users' }}" />
+                </div>
+
+                <div class="col-12 col-md-2">
+                  <label for="chooseOption" class="form-label" style="margin-bottom: 0">Message Type</label>
+                  <input type="text" readonly class="form-control-plaintext" id="message" value="{{ optionType || '--' }}" />
+                </div>
+
+                <div *ngIf="optionType === 'Event'" class="col-12 col-md-3">
+                  <label for="inputState" class="form-label">Event Date </label>
+                  <p style="margin-bottom: 0"><label>Start Date & Time : </label> {{ createAnnouncement.get('startDate')?.value }}</p>
+                  <p><label>End Date & Time : </label> {{ createAnnouncement.get('endDate')?.value }}</p>
+                </div>
+              </div>
+
+              <div class="row g-3 mb-3">
+                <div class="col-12 col-md-6">
+                  <div class="title-wrapper">
+                    <label for="title" class="form-label" style="margin-bottom: 0">Title</label>
+                    <div id="title" class="form-control-plaintext" style="white-space: normal; word-wrap: break-word">
+                      {{ createAnnouncement.get('title')?.value || '--' }}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="message" class="form-label" style="margin-bottom: 0">Message</label>
+                  <div id="message" class="form-control-plaintext" style="white-space: normal; word-wrap: break-word">
+                    {{ createAnnouncement.get('nudgeMessage')?.value || '--' }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="row g-3 mb-3">
+                <div class="col-12 col-md-3">
+                  <label for="schedule" class="form-label" style="margin-bottom: 0">Schedule Nudge</label>
+                  <input
+                    type="text"
+                    readonly
+                    class="form-control-plaintext"
+                    id="schedule"
+                    value="{{ createAnnouncement.get('isScheduledNudge')?.value === true ? 'Yes' : 'No' }}" />
+                </div>
+
+                <div class="col-12 col-md-3">
+                  <label for="scheduleDate" class="form-label">Schedule Date</label>
+                  <p>{{ createAnnouncement.get('dateTime')?.value || '--' }}</p>
+                </div>
+
+                <div class="col-12 col-md-3">
+                  <label for="attachment" class="form-label">Link</label>
+                  <p>{{ createAnnouncement.get('link')?.value || '--' }}</p>
+                </div>
+
+                <div class="col-12 col-md-3">
+                  <label for="attachment" class="form-label">Attachment</label>
+                  <p>{{ filename || '--' }}</p>
+                </div>
+              </div>
+
+              <div class="row g-3 mb-3">
+                <div *ngIf="selectData.length > 0" class="col-12 col-md-12">
+                  <label class="form-label">Selected Users:</label>
+                  <div style="overflow-x: auto; max-width: 100%; height: auto; overflow-y: auto" class="mt-2 mb-5">
+                    <table class="table table-striped">
+                      <thead class="table-head">
+                        <tr>
+                          <th></th>
+                          <th scope="col" class="table-heading">Full Name</th>
+                          <th scope="col" class="table-heading">Email</th>
+                          <th *ngIf="optionType === 'Event'">Availability</th>
+                        </tr>
+                      </thead>
+                      <tbody class="insurer-table">
+                        <tr *ngFor="let user of selectData">
+                          <td>
+                            <div class="user-profile-img">
+                              <img
+                                [src]="user.photo ? user.photo : 'assets/images/profile/user-1.jpg'"
+                                class="rounded-circle"
+                                width="35"
+                                height="35"
+                                alt="" />
+                            </div>
+                          </td>
+                          <td>{{ user.fullName }}</td>
+                          <td>{{ user.email }}</td>
+                          <td *ngIf="optionType === 'Event'">
+                            <span
+                              [style.background-color]="user.hasAppointment ? 'red' : 'green'"
+                              [style.width]="'10px'"
+                              [style.height]="'10px'"
+                              [style.border-radius]="'50%'"
+                              [style.display]="'inline-block'"></span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div *ngIf="dataGroupRecord.length > 0" class="col-12 col-md-12">
+                  <label class="form-label">Selected Groups:</label>
+                  <div style="overflow-x: auto; max-width: 100%; height: auto; overflow-y: auto" class="mt-2 mb-5">
+                    <table class="table table-striped">
+                      <thead class="table-head">
+                        <tr>
+                          <th scope="col" class="table-heading">Name</th>
+                          <th scope="col" class="table-heading">Description</th>
+                          <th scope="col" class="table-heading">Count</th>
+                        </tr>
+                      </thead>
+                      <tbody class="insurer-table">
+                        <tr *ngFor="let items of dataGroupRecord">
+                          <td>{{ items.messageGroupName }}</td>
+                          <td>{{ items.messageGroupDesc }}</td>
+                          <td>{{ items.userCount }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Poll Options, shown if optionType is 'Poll' -->
+              <!-- Uncomment this section if needed -->
+              <!--
+              <div *ngIf="createAnnouncement.get('optionType')?.value === 'Poll'">
+                <label for="type" class="form-label">Poll Options</label>
+                <ul>
+                  <li *ngFor="let control of pollTextboxes.controls; let i = index">
+                    {{ i + 1 }}: {{ control.value }}
+                  </li>
+                </ul>
+              </div>
+              -->
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="d-flex justify-content-center gap-3">
+            <button class="btn btn-primary" type="button" (click)="PreviousTab()" [disabled]="currentTab === 1">Back</button>
+            <button type="button" id="next_button" class="btn btn-success" (click)="nextTab()" [disabled]="!isFormValid" *ngIf="currentTab < 3">
+              Next
+            </button>
+            <button class="btn btn-success" type="button" *ngIf="currentTab === 3" (click)="saveAnnouncementForm()">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

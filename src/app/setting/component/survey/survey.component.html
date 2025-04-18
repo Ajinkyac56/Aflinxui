@@ -1,0 +1,140 @@
+<div class="container-fluid">
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading"><i class="fa-solid fa-clipboard-list me-2"></i>Surveys</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a class="text-dark">> Surveys</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row align-items-center mb-4">
+      <div class="col-md-8 col-lg-9">
+        <form [formGroup]="searchForm" (ngSubmit)="searchSurveyList(true)">
+          <div class="row g-3 align-items-center">
+            <!-- Category Input -->
+            <div class="col-md-6 col-lg-4">
+              <input type="text" class="form-control input" formControlName="surveyName" placeholder="Enter Survey Name" />
+            </div>
+            <!-- Search Button -->
+            <div class="col-md-2 col-lg-1">
+              <button type="submit" class="btn btn-rounded btn-primary w-100 search-btn" matTooltip="Search">
+                <i class="ti ti-search" style="font-size: 21px"></i>
+              </button>
+            </div>
+            <!-- Reset Button -->
+            <div class="col-md-2 col-lg-1">
+              <button class="btn btn-primary w-100 reset-btn" type="button" matTooltip="Refresh" (click)="resetSearch()">
+                <i class="fs-7 ti ti-refresh"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Dialog Button -->
+      <div class="col-md-4 col-lg-3 text-end">
+        <button class="btn btn-primary" (click)="openDialog()"><i class="fa fa-plus"></i> Add</button>
+      </div>
+    </div>
+
+    <div style="overflow-x: auto" class="card mt-5 mb-5">
+      <table class="table table-striped pb-4">
+        <thead class="table-head">
+          <tr>
+            <th scope="col" class="table-heading" style="width: 60px">
+              <input
+                class="form-check-input success checkAll"
+                type="checkbox"
+                id="selectAllCheckbox"
+                (change)="checkBoxValueClicked($event, 'all')" />
+            </th>
+            <th scope="col">Survey Name</th>
+            <th scope="col">Description</th>
+            <th scope="col" class="table-heading" style="color: #5a6a85; width: 100px">
+              <div class="dropdown dropstart">
+                <a href="#" class="fw-bolder" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="color: #5a6a85">
+                  Action <i class="fa fa-caret-down fs-2 ml-2" style="color: #0f456b"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center gap-3"> <i class="fs-4 ti ti-download" style="color: #0f456b"></i>Download </a>
+                  </li>
+                </ul>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let survey of surveyList; let surveyIndex = index">
+            <td>
+              <input
+                class="form-check-input success Checklist-table"
+                type="checkbox"
+                [id]="'surveyCheckbox-' + surveyIndex"
+                (change)="checkBoxValueClicked($event, '', survey)" />
+            </td>
+            <td>{{ survey.surveyName }}</td>
+            <td>{{ survey.surveyDescription }}</td>
+            <td>
+              <ng-container *ngIf="expandAction; else showButtons">
+                <div class="dropdown dropstart">
+                  <a href="#" class="text-muted" id="dropdownMenuButton{{ surveyIndex }}" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="ti ti-dots fs-5" style="color: #0f456b"></i>
+                  </a>
+                  <ul class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + surveyIndex">
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-3" (click)="openAddQuestionDialog(survey)">
+                        <i class="fa fa-plus-circle" style="color: #00ae8d"></i>Add Question
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-3"> <i class="fas fa-lightbulb" style="color: #00ae8d"></i>Active </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-3"> <i class="fas fa-lightbulb"></i>Inactive </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-3" (click)="openDialog(survey)">
+                        <i class="bi bi-pencil-square fs-5" style="color: #0f456b"></i>Edit
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-3" (click)="deleteSurveyList(survey.surveyId, 0)">
+                        <i class="fs-3 fa-solid fa-trash-can" style="color: red"></i>Delete
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </ng-container>
+              <ng-template #showButtons>
+                <div class="btn-group d-flex align-items-center align-btn" style="gap: 15px">
+                  <a class="text-muted" (click)="openAddQuestionDialog(survey)" matTooltip="Add Question">
+                    <i class="fa fa-plus-circle fs-4" style="color: #00ae8d"></i>
+                  </a>
+                  <a class="text-muted" (click)="openDialog(survey)" title="Edit" style="cursor: pointer" matTooltip="Edit">
+                    <i class="bi bi-pencil-square fs-4" style="color: #0f456b"></i>
+                  </a>
+                  <a (click)="deleteSurveyList(survey.surveyId, 0)" class="text-muted" matTooltip="Delete" style="cursor: pointer">
+                    <i class="fs-3 fa-solid fa-trash-can" style="color: red"></i>
+                  </a>
+                </div>
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

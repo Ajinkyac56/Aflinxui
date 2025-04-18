@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="278.163" height="245.609" viewBox="0 0 278.163 245.609">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_17633" data-name="Path 17633" d="M0-.7S6.941,3.477,43.029-3.036c24.209-5.151,38.526,13.289,58.8,3.392,33.166-10.714,44,10.243,83.89-1.052,17.633-4.992,30.59-7.411,46.579-6.484,7.828.453,16.767,4.813,22.65,5.7a35.348,35.348,0,0,0,23.216-7.174L272.318,71.1H0Z" transform="translate(0 28.656)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Group_31357" data-name="Group 31357" transform="translate(-283.695 -248.39)">
+    <g id="Group_31257" data-name="Group 31257" transform="translate(-185)">
+      <g id="Mask_Group_22" data-name="Mask Group 22" transform="translate(468.695 394.244)" clip-path="url(#clip-path)">
+        <path id="Icon_awesome-shield-alt" data-name="Icon awesome-shield-alt" d="M187.8,34.675l-79.56-33.15a19.952,19.952,0,0,0-15.29,0L13.39,34.675A19.869,19.869,0,0,0,1.125,53.031c0,82.253,47.446,139.105,91.784,157.586a19.952,19.952,0,0,0,15.29,0c35.512-14.793,91.825-65.885,91.825-157.586A19.9,19.9,0,0,0,187.8,34.675Z" transform="translate(35.484 -142.502)" fill="#ff4d58"/>
+      </g>
+      <path id="Icon_awesome-shield-alt-2" data-name="Icon awesome-shield-alt" d="M100.6-3.5a23.335,23.335,0,0,1,8.986,1.79l79.565,33.152a23.3,23.3,0,0,1,14.378,21.588c0,96.24-61.474,147.277-93.979,160.817a23.549,23.549,0,0,1-17.979,0C46.319,194.99-2.375,136.621-2.375,53.031A23.288,23.288,0,0,1,12.053,31.44L91.6-1.706A23.342,23.342,0,0,1,100.6-3.5Zm-.041,212.139a16.353,16.353,0,0,0,6.3-1.255c31.012-12.919,89.668-61.806,89.668-154.354a16.323,16.323,0,0,0-10.068-15.125L106.895,4.755a16.53,16.53,0,0,0-12.6,0L14.737,37.905A16.312,16.312,0,0,0,4.625,53.031c0,80.384,46.462,136.362,89.63,154.356A16.347,16.347,0,0,0,100.554,208.641Z" transform="translate(504.18 251.889)" fill="#4e5868"/>
+    </g>
+    <text id="Protection_Level_Weak" data-name="Protection Level
+Weak" transform="translate(419 325)" fill="#4e5868" font-size="17" font-family="Mulish-Bold, Mulish" font-weight="700"><tspan x="-64" y="0">Protection Level</tspan><tspan fill="#ff4d58" font-size="32" font-family="Mulish-ExtraBold, Mulish" font-weight="800"><tspan x="-45" y="36">Weak</tspan></tspan></text>
+  </g>
+</svg>

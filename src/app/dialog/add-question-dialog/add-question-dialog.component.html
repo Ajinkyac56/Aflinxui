@@ -1,0 +1,83 @@
+<div class="modal-dialog modal-dialog-centered w-100 h-100 m-0">
+  <div class="modal-content d-flex flex-column h-100 p-4">
+    <div class="modal-header border-bottom pb-4">
+      <h5 class="modal-title">Add Questions to : "{{ data.surveyName }}"</h5>
+      <button type="button" class="btn-close" (click)="closeDialog()"></button>
+    </div>
+
+    <form [formGroup]="questionForm" (ngSubmit)="submit()" class="d-flex flex-column flex-grow-1">
+      <div class="modal-body">
+        <div class="row g-4">
+          <!-- Question Type Selection -->
+          <div class="col-12">
+            <h6>Select Question Type :</h6>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <div class="d-flex flex-wrap justify-content-center gap-3">
+                <button
+                  *ngFor="let type of questionTypes"
+                  type="button"
+                  class="btn"
+                  [ngClass]="{
+                    'btn-primary': selectedQuestionType === type,
+                    'btn-light-primary': selectedQuestionType !== type
+                  }"
+                  (click)="selectQuestionType(type)">
+                  {{ type }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question Input Section -->
+          <div *ngIf="selectedQuestionType" class="col-12">
+            <h6>{{ selectedQuestionType }} Questions :</h6>
+            <div formArrayName="questions">
+              <div *ngFor="let question of questions.controls; let i = index" [formGroupName]="i" class="d-flex align-items-center gap-3 mb-3">
+                <!-- Input for Text, Single Choice, and Multiple Choice -->
+                <input
+                  *ngIf="selectedQuestionType !== 'Rating'"
+                  formControlName="questionText"
+                  class="form-control"
+                  placeholder="Enter your question" />
+
+                <!-- Star Rating Input -->
+                <div *ngIf="selectedQuestionType === 'Rating'" class="d-flex align-items-center gap-2">
+                  <label>Rate: </label>
+                  <div class="rating-stars">
+                    <mat-icon
+                      *ngFor="let star of [1, 2, 3, 4, 5]; let starIndex = index"
+                      [ngClass]="{
+                        'text-warning': question.get('rating')?.value >= star,
+                        'text-secondary': question.get('rating')?.value < star
+                      }"
+                      (click)="setRating(i, star)">
+                      {{ question.get('rating')?.value >= star ? 'star' : 'star_border' }}
+                    </mat-icon>
+                  </div>
+                </div>
+
+                <!-- Trash Icon for Remove Button -->
+                <a
+                  *ngIf="questions.length > 1 && selectedQuestionType !== 'Rating'"
+                  href="javascript:void(0)"
+                  style="color: red; text-decoration: none"
+                  (click)="removeQuestion(i)">
+                  <i class="bi bi-trash fs-5"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- "Add Another Question" button should NOT appear for Rating type -->
+            <button *ngIf="selectedQuestionType !== 'Rating'" type="button" class="btn btn-primary mt-2" (click)="addQuestion()">
+              <i class="fa fa-plus"></i> Add Another Question
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer justify-content-center mt-4">
+        <button type="submit" class="btn btn-primary" [disabled]="questionForm.invalid">SAVE</button>
+      </div>
+    </form>
+  </div>
+</div>

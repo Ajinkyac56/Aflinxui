@@ -1,0 +1,21 @@
+<div class="modal-dialog modal-dialog-centered w-100 h-100 m-0">
+  <div class="modal-content d-flex flex-column h-100 p-4">
+    <div class="modal-header border-bottom pb-3">
+      <h5 class="modal-title">{{ data?.id ? 'Edit Specialty' : 'Add Specialty' }}</h5>
+      <button type="button" class="btn-close" (click)="closeDialog()"></button>
+    </div>
+    <form [formGroup]="specialityForm" (ngSubmit)="onSave()" class="d-flex flex-column flex-grow-1">
+      <div class="modal-body">
+        <div class="row g-4">
+          <div class="col-12">
+            <label class="form-label">Name <span class="text-danger">*</span></label>
+            <input class="form-control" formControlName="name" placeholder="Enter Specialty" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button class="btn btn-primary" type="submit" [disabled]="specialityForm.invalid">SAVE</button>
+      </div>
+    </form>
+  </div>
+</div>

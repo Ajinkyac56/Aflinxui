@@ -1,0 +1,112 @@
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content requirement-dialog p-4">
+    <!-- Modal Header -->
+    <div class="modal-header border-bottom pb-3">
+      <h2 mat-dialog-title>{{ data?.certificateId ? 'Edit Certification' : 'Add Certification' }}</h2>
+      <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
+    </div>
+
+    <form [formGroup]="certificationForm">
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="row g-4 mb-3">
+          <!-- Category -->
+          <div class="col-md-6">
+            <label class="form-label">Category <span class="text-danger">*</span></label>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select placeholder="Select Category" formControlName="categoryId">
+                <ngx-mat-select-search [formControl]="categorySearchControl" placeholderLabel="Search Category" noEntriesFoundLabel="Data not found">
+                </ngx-mat-select-search>
+                <mat-option *ngFor="let category of categoryList" [value]="category.categoryId">
+                  {{ category.categoryName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Sub-Category -->
+          <div class="col-md-6">
+            <label class="form-label">Sub-Category <span class="text-danger">*</span></label>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select placeholder="Select Subcategory" formControlName="subCategoryId">
+                <ngx-mat-select-search
+                  [formControl]="subCategorySearchControl"
+                  placeholderLabel="Search Subcategory"
+                  noEntriesFoundLabel="Data not found">
+                </ngx-mat-select-search>
+                <mat-option *ngFor="let subCategory of subCategoryList" [value]="subCategory.subCategoryId">
+                  {{ subCategory.subCategoryName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row g-4 mb-3">
+          <!-- Certification Title -->
+          <div class="col-md-6">
+            <label class="form-label">Title of License or Certificate <span class="text-danger">*</span></label>
+            <input class="form-control" formControlName="titleOfLicense" placeholder="Enter Certificate Name" />
+          </div>
+
+          <!-- Granted By -->
+          <div class="col-md-6">
+            <label class="form-label">Granted By <span class="text-danger">*</span></label>
+            <input class="form-control" formControlName="grantedBy" placeholder="Granted By" />
+          </div>
+        </div>
+
+        <div class="row g-4 mb-3">
+          <!-- Start Date -->
+          <div class="col-md-6">
+            <label class="form-label">Start Date <span class="text-danger">*</span></label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput [matDatepicker]="startDate" placeholder="Date Obtained" formControlName="certificateDate" />
+              <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+              <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- Expiration Date -->
+          <div class="col-md-6">
+            <label class="form-label">End Date <span class="text-danger">*</span></label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput [matDatepicker]="endDate" placeholder="Expiration Date" formControlName="expirationDate" />
+              <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+              <mat-datepicker #endDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row g-4 mb-3">
+          <!-- File Upload -->
+          <div class="col-md-6">
+            <label class="form-label">File Upload:</label>
+            <div
+              id="certFile"
+              (click)="uploadFileClick('upFile-cert')"
+              class="upload-file form-control d-flex align-items-center justify-content-between px-3">
+              <span *ngIf="!userCertification && !certificationForm.get('certificationDocumentName')?.value">Upload File</span>
+              <span *ngIf="userCertification">{{ userCertification.name }}</span>
+              <span *ngIf="!userCertification && certificationForm.get('certificationDocumentName')?.value">{{
+                certificationForm.get('certificationDocumentName')?.value
+              }}</span>
+              <img src="assets/image/onboarding/Upload.svg" alt="Upload Icon" style="width: 20px; height: 20px" />
+            </div>
+            <input
+              id="upFile-cert"
+              formControlName="certificationDocumentName"
+              type="file"
+              class="form-control d-none"
+              (change)="fileUpload($event)" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer d-flex justify-content-center pt-3">
+        <button class="btn btn-primary px-4 fw-bold" type="submit" (click)="submitCertificationForm()">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+<div class="container-fluid">
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading"><i class="ti ti-user-plus me-2"></i>Create Airman</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/userAndgroup']" class="text-muted">>&nbsp;Manage Airmen ></a>
+            </li>
+            <li class="breadcrumb-item text-dark" aria-current="page" *ngIf="!isEdit; else editCase">&nbsp;Create Airman</li>
+            <ng-template #editCase>
+              <li class="breadcrumb-item text-dark" aria-current="page">&nbsp; Edit Airman</li>
+              <ng-template #viewCaseHeader>
+                <li class="breadcrumb-item text-dark" aria-current="page">&nbsp; View Airman</li>
+              </ng-template>
+            </ng-template>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <form [formGroup]="createAirmanForm">
+    <div class="row">
+      <div class="col-md-12 col-lg-4">
+        <div class="mb-3">
+          <label for="firstName" class="form-label">First Name<span style="color: red">*</span></label>
+          <input type="text" class="form-control input" id="firstName" placeholder="Enter Airman Name" formControlName="firstName" required />
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg-4">
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Last Name<span style="color: red">*</span></label>
+          <input type="text" class="form-control input" id="lastName" placeholder="Enter Airman Name" formControlName="lastName" required />
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg-4">
+        <div class="mb-3">
+          <label for="dodId" class="form-label">Airman Code<span style="color: red">*</span></label>
+          <input type="text" class="form-control input" id="dodId" placeholder="Enter Airman Code" formControlName="dodId" required />
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg-4">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email ID<span style="color: red">*</span></label>
+          <input type="email" class="form-control input" id="email" placeholder="Enter Email ID" formControlName="email" required />
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg-4">
+        <div class="mb-3">
+          <label for="mobile" class="form-label">Phone Number<span style="color: red">*</span></label>
+          <input type="tel" class="form-control input" id="mobile" placeholder="Enter Phone Number" formControlName="mobile" required />
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg-4">
+        <div class="mb-3">
+          <label for="photo" class="form-label">Photo</label>
+          <div id="yourFile" (click)="uploadFileClick('upFile-ho')" class="upload-file form-control input">
+            Upload File <img src="assets/image/onboarding/Upload.svg" alt="Upload Icon" />
+          </div>
+          <div style="height: 0px; width: 0px; overflow: hidden">
+            <input id="upFile-ho" type="file" class="form-control input" accept="image/*" (change)="fileUpload($event)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg-4">
+        <div class="mb-3">
+          <div>
+            <label for="squadronId" class="form-label">Squadron/Groups<span style="color: red">*</span></label>
+          </div>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select formControlName="squadronId" placeholder="Select squadron/groups">
+              <ngx-mat-select-search [formControl]="squadronSearchControl" placeholderLabel="Search squadrons" noEntriesFoundLabel="Data not found">
+              </ngx-mat-select-search>
+              <mat-option *ngFor="let squadron of squadronListFiltered" [value]="squadron.id">
+                {{ squadron.squadronName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-4">
+        <div class="mb-3">
+          <div>
+            <label for="userType" class="form-label">Role<span style="color: red">*</span></label>
+          </div>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select formControlName="userType" placeholder="Select Role">
+              <ngx-mat-select-search [formControl]="roleSearchControl" placeholderLabel="Search Role" noEntriesFoundLabel="Data not found">
+              </ngx-mat-select-search>
+              <mat-option *ngFor="let role of roleListFiltered" [value]="role.name">
+                {{ role.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-5">
+      <div class="col-md-6 text-center mx-auto">
+        <button class="btn btn-primary" (click)="saveAirman()">SUBMIT</button>
+      </div>
+    </div>
+  </form>
+</div>

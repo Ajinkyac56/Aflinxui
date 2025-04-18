@@ -1,0 +1,146 @@
+<div class="container-fluid">
+  <div class="card bg-light-success shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 pt-3 pb-2">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h5 class="fw-semibold page-heading"><i class="ti ti-user-plus me-2"></i>Requirement Weight</h5>
+        </div>
+        <nav aria-label="breadcrumb mt-2">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item text-muted">
+              <a [routerLink]="['/dashboard/smart-board']" class="text-muted">Home</a>
+            </li>
+            <li class="breadcrumb-item text-muted">
+              <a class="text-dark">>&nbsp;Requirement Weight</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <form [formGroup]="reqWeightSearchForm">
+      <div class="d-flex align-items-center">
+        <div class="row g-3 align-items-center flex-grow-1">
+          <div class="col-md-6 col-lg-3">
+            <input type="text" class="form-control input" formControlName="reqWeightName" placeholder="Search Requirement Weight" />
+          </div>
+          <div class="col-md-1 col-lg-1">
+            <button class="btn btn-rounded btn-primary w-100 search-btn" matTooltip="Search" (click)="searchReqWeight(true)">
+              <i class="ti ti-search" style="font-size: 21px"></i>
+            </button>
+          </div>
+          <div class="col-md-1 col-lg-1">
+            <button class="btn btn-primary w-100 reset-btn" type="button" matTooltip="Refresh" (click)="resetFilter()">
+              <i class="fs-7 ti ti-refresh"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4 ms-3">
+          <button *ngIf="hasAccessToAdd" class="btn btn-primary ms-auto" (click)="openDialog()"><i class="fa fa-plus"></i> Add</button>
+        </div>
+      </div>
+    </form>
+
+    <div style="overflow-x: auto" class="card mt-5 mb-5">
+      <table class="table table-striped pb-4">
+        <thead class="table-head">
+          <tr>
+            <th scope="col" class="table-heading" style="width: 60px">
+              <input
+                class="form-check-input success checkAll"
+                type="checkbox"
+                value=""
+                id="mycheckbox1"
+                name="checkAll"
+                (change)="checkBoxValueClicked($event, 'all', undefined)" />
+            </th>
+            <th scope="col">Requirements</th>
+            <th scope="col">Weight %</th>
+            <th scope="col" class="table-heading" style="color: #5a6a85; width: 100px">
+              <div class="dropdown dropstart">
+                <a href="#" class="fw-bolder" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="color: #5a6a85">
+                  Action <i class="fa fa-caret-down fs-2 ml-2" style="color: #0f456b"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li *ngIf="hasAccessToDownload">
+                    <a class="dropdown-item d-flex align-items-center gap-3" (click)="downloadTableData()">
+                      <i class="fs-4 ti ti-download" style="color: #0f456b"></i>Download
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="requirement-table">
+          <tr *ngFor="let requirementWeight of requirementWeightData; let requirementIndex = index">
+            <td>
+              <input
+                class="form-check-input success"
+                type="checkbox"
+                value=""
+                [id]="'myUserCheckBox-headOffice' + requirementIndex"
+                (change)="checkBoxValueClicked($event, '', requirementWeight)" />
+            </td>
+            <td>{{ requirementWeight.reqName }}</td>
+            <td>{{ requirementWeight.weight }}%</td>
+            <td>
+              <!-- Conditionally show the full action menu or distinct buttons based on expandAction -->
+              <ng-container *ngIf="expandAction; else showButtons">
+                <div class="dropdown dropstart">
+                  <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="ti ti-dots fs-5" style="color: #0f456b"></i>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li *ngIf="hasAccessToEdit">
+                      <a class="dropdown-item d-flex align-items-center gap-3" (click)="openDialog(requirementWeight)">
+                        <i class="fa-solid fa-pen" style="color: #0f456b"></i>Edit
+                      </a>
+                    </li>
+                    <!-- Uncomment if View action is needed -->
+                    <!-- <li *ngIf="hasAccessToEdit">
+                      <a class="dropdown-item d-flex align-items-center gap-3" (click)="openDialog(requirementWeight)">
+                        <i class="fs-4 ti ti-eye" style="color: #0f456b"></i>View
+                      </a>
+                    </li> -->
+                    <li *ngIf="hasAccessToActive && !requirementWeight.isActive">
+                      <a class="dropdown-item d-flex align-items-center gap-3"> <i class="fas fa-lightbulb" style="color: #00ae8d"></i>Active </a>
+                    </li>
+                    <li *ngIf="hasAccessToInactive && requirementWeight.isActive">
+                      <a class="dropdown-item d-flex align-items-center gap-3"> <i class="fas fa-lightbulb"></i>Inactive </a>
+                    </li>
+                  </ul>
+                </div>
+              </ng-container>
+
+              <!-- Show all action buttons distinctly if expandAction is false -->
+              <ng-template #showButtons>
+                <div class="btn-group d-flex align-items-center" style="gap: 15px">
+                  <a *ngIf="hasAccessToEdit" (click)="openDialog(requirementWeight)" class="text-muted" title="Edit" style="cursor: pointer">
+                    <i class="fs-4 fa-solid fa-pen" style="color: #0f456b"></i>
+                  </a>
+                  <!-- Uncomment if View action is needed -->
+                  <!-- <a *ngIf="hasAccessToEdit" (click)="openDialog(requirementWeight)" class="text-muted" title="View" style="cursor: pointer;">
+                    <i class="fs-4 ti ti-eye" style="color: #0f456b;"></i>
+                  </a> -->
+                  <a *ngIf="hasAccessToActive && !requirementWeight.isActive" class="text-muted" title="Active" style="cursor: pointer">
+                    <i class="fs-3 fas fa-lightbulb" style="color: #00ae8d"></i>
+                  </a>
+                  <a *ngIf="hasAccessToInactive && requirementWeight.isActive" class="text-muted" title="Inactive" style="cursor: pointer">
+                    <i class="fs-3 fas fa-lightbulb"></i>
+                  </a>
+                </div>
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="col-sm-6 align-self-center" style="width: 200px">
+        <a class="btn d-flex fw-bolder" *ngIf="!noMoreRecords" id="loadMore" (click)="loadMoreRecord()">Load More...</a>
+      </div>
+    </div>
+  </div>
+</div>

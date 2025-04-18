@@ -1,0 +1,43 @@
+.edit-input {
+    height: 25px;
+    width: 100%;
+}
+
+.text-red {
+    color: #FF4D58 !important;
+}
+
+.radio-group {
+    margin-left: 10px;
+}
+
+.input-container {
+    position: relative;
+    /* Set your desired input width */
+}
+
+.icon {
+    position: absolute;
+    right: 18px;
+    /* Adjust the distance from the right edge of the input */
+    top: 71%;
+    transform: translateY(-50%);
+    color: #00AE8D;
+    /* Set the icon color */
+}
+
+.error-img {
+    width: 75%;
+}
+
+@media only screen and (max-width: 767px) {
+    .invoice {
+        display: block;
+    }
+    .radio-group {
+        margin-left: 0px;
+    }
+    .error-img {
+        width: 75%;
+    }
+}
